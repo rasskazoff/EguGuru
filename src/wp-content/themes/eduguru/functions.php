@@ -49,7 +49,8 @@ function eduguru_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'eduguru' ),
+			'main-menu' => esc_html__( 'Основное меню', 'eduguru' ),
+			'top-menu' => esc_html__( 'Верхнее меню', 'eduguru' ),
 		)
 	);
 
