@@ -1,4 +1,4 @@
-/node_modules/
-/references/
-/src/*
-!/src/wp-content/themes/eduguru/
+node_modules/
+references/
+src/*
+!src/wp-content/themes/eduguru/
