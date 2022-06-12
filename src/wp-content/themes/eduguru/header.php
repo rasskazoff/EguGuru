@@ -40,6 +40,11 @@
 				<?php endif; ?>
 			</div><!-- .site-branding -->
 			
+			<form action="" method="">
+				<input type="text" name="search" id="search">
+				<input type="submit" value="ok">
+			</form>
+
 			<nav>
 				<?php
 				wp_nav_menu(
