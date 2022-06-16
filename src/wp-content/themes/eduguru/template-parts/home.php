@@ -62,6 +62,95 @@ Template Post Type: post, page, product
 			<input type="checkbox" name="filter_6" id="filter_6">
 			<label for="filter_6">с мини группе</label>
 		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_1" id="filter_1">
+			<label for="filter_1">с носителем языка</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_2" id="filter_2">
+			<label for="filter_2">с русскоязычным учителем</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_3" id="filter_3">
+			<label for="filter_3">бесплатный пробный урок</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_4" id="filter_4">
+			<label for="filter_4">в группе</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_5" id="filter_5">
+			<label for="filter_5">индивидуально</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_6" id="filter_6">
+			<label for="filter_6">с мини группе</label>
+		</div>
+		<div class="filter_item">
+			<input type="checkbox" name="filter_1" id="filter_1">
+			<label for="filter_1">с носителем языка</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_2" id="filter_2">
+			<label for="filter_2">с русскоязычным учителем</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_3" id="filter_3">
+			<label for="filter_3">бесплатный пробный урок</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_4" id="filter_4">
+			<label for="filter_4">в группе</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_5" id="filter_5">
+			<label for="filter_5">индивидуально</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_6" id="filter_6">
+			<label for="filter_6">с мини группе</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_1" id="filter_1">
+			<label for="filter_1">с носителем языка</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_2" id="filter_2">
+			<label for="filter_2">с русскоязычным учителем</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_3" id="filter_3">
+			<label for="filter_3">бесплатный пробный урок</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_4" id="filter_4">
+			<label for="filter_4">в группе</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_5" id="filter_5">
+			<label for="filter_5">индивидуально</label>
+		</div>
+
+		<div class="filter_item">
+			<input type="checkbox" name="filter_6" id="filter_6">
+			<label for="filter_6">с мини группе</label>
+		</div>
 	</div>
 	<div class="more_btn">
 		<input type="checkbox" name="filter_more" id="filter_more">
@@ -71,7 +160,7 @@ Template Post Type: post, page, product
 <div class="cards_wrap">
 	<div class="cards container">
 		<div class="quantity_results">Найдено 8 вариантов:</div>
-		<div class="card_wrap">
+		<div class="card_wrap top">
 			<div class="card_top_label">Выбор редакции</div>
 			<div class="card">
 				<div class="card_logo">
@@ -98,6 +187,16 @@ Template Post Type: post, page, product
 						<div class="card_step step-4">
 							<div class="card_step_tittle">возраст</div>
 							<div class="card_step_desc"><strong>4-12 лет</strong></div>
+						</div>
+					</div>
+					<div class="detail">
+						<div class="detail_item">
+							<div class="detail_tittle">Обучение по стандартам Cambridge и CEFR</div>
+							<div class="detail_desc">Мы используем эффективный метод полного физического реагирования (TPR) и Кембриджскую коммуникативную методику. По результатам прохождения курсов наши ученики сдают внутренний экзамен и подтверждают уровень владения языком по международному стандарту.</div>
+						</div>
+						<div class="detail_item">
+							<div class="detail_tittle">Интерактивная платформа</div>
+							<div class="detail_desc">Классная комната, разработанная с заботой о ребенке и его успехах. Тематические игры, учебные материалы, домашние задания, задачи по интересам вовлекают ребенка в процесс обучения с первых минут.</div>
 						</div>
 					</div>
 					<div class="card_actions">
@@ -147,6 +246,16 @@ Template Post Type: post, page, product
 							<div class="card_step_desc"><strong>4-16 лет</strong></div>
 						</div>
 					</div>
+					<div class="detail">
+						<div class="detail_item">
+							<div class="detail_tittle">Обучение по стандартам Cambridge и CEFR</div>
+							<div class="detail_desc">Мы используем эффективный метод полного физического реагирования (TPR) и Кембриджскую коммуникативную методику. По результатам прохождения курсов наши ученики сдают внутренний экзамен и подтверждают уровень владения языком по международному стандарту.</div>
+						</div>
+						<div class="detail_item">
+							<div class="detail_tittle">Интерактивная платформа</div>
+							<div class="detail_desc">Классная комната, разработанная с заботой о ребенке и его успехах. Тематические игры, учебные материалы, домашние задания, задачи по интересам вовлекают ребенка в процесс обучения с первых минут.</div>
+						</div>
+					</div>
 					<div class="card_actions">
 						<div class="more_btn">
 							<input type="checkbox" name="more_btn__card-2" id="more_btn__card-2">
@@ -166,7 +275,7 @@ Template Post Type: post, page, product
 							<div class="promo_discount">-10%</div>
 						</div>
 						<div class="col">
-							<h3 class="promo_tittle">Введи промокод NOVA12и получи скидку 10%</h3>
+							<h3 class="promo_tittle">Введи промокод NOVA12 и получи скидку 10%</h3>
 							<p class="promo_note">*Акция действует для новых клиентов только до 01.03.22</p>
 						</div>
 					</div>
@@ -216,7 +325,7 @@ Template Post Type: post, page, product
 					<div class="card_actions">
 						<div class="more_btn">
 							<input type="checkbox" name="more_btn__card-3" id="more_btn__card-3">
-							<label for="more_btn__card-3">скрыть</label>
+							<label for="more_btn__card-3">показать больше</label>
 						</div>
 						<div class="btn_wrap">
 							<div class="card_price">
@@ -232,7 +341,7 @@ Template Post Type: post, page, product
 							<div class="promo_discount">-10%</div>
 						</div>
 						<div class="col">
-							<h3 class="promo_tittle">Введи промокод NOVA12и получи скидку 10%</h3>
+							<h3 class="promo_tittle">Введи промокод NOVA12 и получи скидку 10%</h3>
 							<p class="promo_note">*Акция действует для новых клиентов только до 01.03.22</p>
 						</div>
 					</div>
@@ -240,6 +349,12 @@ Template Post Type: post, page, product
 			</div>
 		</div>
 
+		<div class="card_show_btn">
+			<div class="more_btn">
+				<input type="checkbox" name="card_show_btn" id="card_show_btn">
+				<label for="card_show_btn">показать больше</label>
+			</div>
+		</div>
 	</div>
 </div>
 <?php get_footer(); ?>

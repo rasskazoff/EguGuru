@@ -51,6 +51,8 @@ function eduguru_setup() {
 		array(
 			'main-menu' => esc_html__( 'Основное меню', 'eduguru' ),
 			'top-menu' => esc_html__( 'Верхнее меню', 'eduguru' ),
+			'footer-menu' => esc_html__( 'Меню в подвале', 'eduguru' ),
+			'bottom-menu' => esc_html__( 'Нижнее меню', 'eduguru' ),
 		)
 	);
 

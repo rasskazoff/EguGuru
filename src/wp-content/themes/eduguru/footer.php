@@ -10,22 +10,42 @@
  */
 
 ?>
-
-	<footer id="colophon" class="site-footer" style="display: none;">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'eduguru' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'eduguru' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'eduguru' ), 'eduguru', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
+	<footer>
+		<div class="footer container">
+			<div class="footer_menu">
+				<div class="footer_logo">
+					<img src="//localhost:3000/wp-content/themes/eduguru/assets/images/logo.svg" alt="logo">
+				</div>
+				<nav>
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'footer-menu',
+							'menu_id'        => 'footer-menu',
+						)
+					);
+					?>
+				</nav>
+			</div>
+			<div class="footer_bottom_menu">
+				<div class="copy">
+						Copyright © 2022 Educationguru.ru<br/>
+						Все права защищены.
+				</div>
+				<nav>
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'bottom-menu',
+							'menu_id'        => 'bottom-menu',
+						)
+					);
+					?>
+				</nav>
+			</div>
+		
+		</div>
+	</footer>
 </div><!-- #page -->
 <script src="<?php echo get_bloginfo('template_url');?>/assets/js/scripts.min.js"></script>
 <?php wp_footer(); ?>
