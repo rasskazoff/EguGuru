@@ -415,10 +415,11 @@ h4,
 h5,
 h6 {
 	clear: both;
+	margin: 0
 }
 
 p {
-	margin-bottom: 1.5em;
+	margin: 0
 }
 
 dfn,
