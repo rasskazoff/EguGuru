@@ -159,70 +159,46 @@ Template Post Type: post, page, product
 </div>
 <div class="cards_wrap">
 	<div class="cards container">
-		<div class="quantity_results">Найдено 8 вариантов:</div>
-		<div class="card_wrap top">
+	
+		<?php		
+		$args = array(
+			'post_type' => 'cources',
+			'post_status' => 'publish',
+			'posts_per_page' => 10,
+			'paged' => 1,
+			'tag' => 'v-gruppe+s-nositelem-yazyka',
+		);
+		$blog_posts = new WP_Query( $args );
+
+		$find_posts = count( get_posts( $args ) );
+
+		function true_wordform($num, $form_for_1, $form_for_2, $form_for_5){
+			$num = abs($num) % 100; // берем число по модулю и сбрасываем сотни (делим на 100, а остаток присваиваем переменной $num)
+			$num_x = $num % 10; // сбрасываем десятки и записываем в новую переменную
+			if ($num > 10 && $num < 20) // если число принадлежит отрезку [11;19]
+				return $form_for_5;
+			if ($num_x > 1 && $num_x < 5) // иначе если число оканчивается на 2,3,4
+				return $form_for_2;
+			if ($num_x == 1) // иначе если оканчивается на 1
+				return $form_for_1;
+			return $form_for_5;
+		}
+		?>
+		<div class="quantity_results"><?php echo true_wordform($find_posts, 'Найден', 'Найдено', 'Найдено') . ' ' . $find_posts . ' ' . true_wordform($find_posts, 'вариант', 'варианта', 'вариантов'); ?>:</div>
+	
+		<?php if ( $blog_posts->have_posts() ) : ?>
+				<?php while ( $blog_posts->have_posts() ) : $blog_posts->the_post(); ?>
+					<?php get_template_part( 'template-parts/content', 'cources' ); ?>					
+				<?php endwhile; ?>
+				<?php wp_reset_postdata(); ?>
+		<?php endif; ?>
+
+		<!--div class="card_wrap">
 			<div class="card_top_label">Выбор редакции</div>
 			<div class="card">
 				<div class="card_logo">
-					<a href="https://novakid.ru" target="_blank">
-						<img src="<?php echo get_bloginfo('template_url');?>/assets/images/Novakid.ru.svg" alt="Novakid.ru">
-						<p>Novakid.ru</p>
-					</a>
-				</div>
-				<div class="card_content">
-					<h2 class="card_tittle">Индивидуальные занятия английским с носителями</h2>
-					<div class="card_steps">
-						<div class="card_step step-1">
-							<div class="card_step_tittle">пробный урок</div>
-							<div class="card_step_desc"><strong>бесплатный</strong></div>
-						</div>
-						<div class="card_step step-2">
-							<div class="card_step_tittle">учитель</div>
-							<div class="card_step_desc"><strong>носитель языка,</strong> для которого английский второй родной (Филиппины, ЮАР)</div>
-						</div>
-						<div class="card_step step-3">
-							<div class="card_step_tittle">формат</div>
-							<div class="card_step_desc"><strong>индивидуальный</strong> онлайн-урок</div>
-						</div>
-						<div class="card_step step-4">
-							<div class="card_step_tittle">возраст</div>
-							<div class="card_step_desc"><strong>4-12 лет</strong></div>
-						</div>
-					</div>
-					<div class="detail">
-						<div class="detail_item">
-							<div class="detail_tittle">Обучение по стандартам Cambridge и CEFR</div>
-							<div class="detail_desc">Мы используем эффективный метод полного физического реагирования (TPR) и Кембриджскую коммуникативную методику. По результатам прохождения курсов наши ученики сдают внутренний экзамен и подтверждают уровень владения языком по международному стандарту.</div>
-						</div>
-						<div class="detail_item">
-							<div class="detail_tittle">Интерактивная платформа</div>
-							<div class="detail_desc">Классная комната, разработанная с заботой о ребенке и его успехах. Тематические игры, учебные материалы, домашние задания, задачи по интересам вовлекают ребенка в процесс обучения с первых минут.</div>
-						</div>
-					</div>
-					<div class="card_actions">
-						<div class="more_btn">
-							<input type="checkbox" name="more_btn__card-1" id="more_btn__card-1">
-							<label for="more_btn__card-1">показать больше</label>
-						</div>
-						<div class="btn_wrap">
-							<div class="card_price">
-								от <span>399₽</span>/урок
-							</div>
-							<div class="card_btn">
-								<a href="#" target="_blank" class="btn">Подробнее</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="card_wrap">
-			<!--div class="card_top_label">Выбор редакции</div-->
-			<div class="card">
-				<div class="card_logo">
 					<a href="https://foxford.ru" target="_blank">
-						<img src="<?php echo get_bloginfo('template_url');?>/assets/images/foxford.ru.svg" alt="foxford.ru">
+						<img src="<?php // echo get_bloginfo('template_url');?>/assets/images/foxford.ru.svg" alt="foxford.ru">
 						<p>foxford.ru</p>
 					</a>
 				</div>
@@ -283,12 +259,12 @@ Template Post Type: post, page, product
 			</div>
 		</div>
 
-		<div class="card_wrap">
-			<!--div class="card_top_label">Выбор редакции</div-->
+		<div-- class="card_wrap">
+			<div class="card_top_label">Выбор редакции</div>
 			<div class="card">
 				<div class="card_logo">
 					<a href="https://allright.com" target="_blank">
-						<img src="<?php echo get_bloginfo('template_url');?>/assets/images/allright.com.svg" alt="allright.com">
+						<img src="<?php //echo get_bloginfo('template_url');?>/assets/images/allright.com.svg" alt="allright.com">
 						<p>allright.com</p>
 					</a>
 				</div>
@@ -347,14 +323,14 @@ Template Post Type: post, page, product
 					</div>
 				</div>
 			</div>
-		</div>
-
+		</div-->
 		<div class="card_show_btn">
-			<div class="more_btn">
+			<div class="more_btn loadmore">
 				<input type="checkbox" name="card_show_btn" id="card_show_btn">
 				<label for="card_show_btn">показать больше</label>
 			</div>
 		</div>
 	</div>
 </div>
+
 <?php get_footer(); ?>

@@ -47,6 +47,7 @@
 		</div>
 	</footer>
 </div><!-- #page -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<?php echo get_bloginfo('template_url');?>/assets/js/scripts.min.js"></script>
 <?php wp_footer(); ?>
 

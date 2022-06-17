@@ -42,12 +42,9 @@
 					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 				<?php endif; ?>
 			</div><!-- .site-branding -->
-			
-			<form action="" method="">
-				<input type="text" name="search" id="search">
-				<input type="submit" value="ok">
-			</form>
-
+			<div class="search">
+				<?php get_search_form(); ?>
+			</div>
 			<nav>
 				<?php
 				wp_nav_menu(
