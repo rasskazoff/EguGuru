@@ -164,13 +164,12 @@ Template Post Type: post, page, product
 		$args = array(
 			'post_type' => 'cources',
 			'post_status' => 'publish',
-			'posts_per_page' => 10,
-			'paged' => 1,
-			'tag' => 'v-gruppe+s-nositelem-yazyka',
+			'posts_per_page' => 2,
+			'paged' => 1
+//			'tag' => 'v-gruppe+s-nositelem-yazyka',
 		);
 		$blog_posts = new WP_Query( $args );
-
-		$find_posts = count( get_posts( $args ) );
+		$count_posts = count( get_posts( $args ) );
 
 		function true_wordform($num, $form_for_1, $form_for_2, $form_for_5){
 			$num = abs($num) % 100; // берем число по модулю и сбрасываем сотни (делим на 100, а остаток присваиваем переменной $num)
@@ -184,7 +183,7 @@ Template Post Type: post, page, product
 			return $form_for_5;
 		}
 		?>
-		<div class="quantity_results"><?php echo true_wordform($find_posts, 'Найден', 'Найдено', 'Найдено') . ' ' . $find_posts . ' ' . true_wordform($find_posts, 'вариант', 'варианта', 'вариантов'); ?>:</div>
+		<div class="quantity_results"><?php echo true_wordform($count_posts, 'Найден', 'Найдено', 'Найдено') . ' ' . $count_posts . ' ' . true_wordform($count_posts, 'вариант', 'варианта', 'вариантов'); ?>:</div>
 	
 		<?php if ( $blog_posts->have_posts() ) : ?>
 				<?php while ( $blog_posts->have_posts() ) : $blog_posts->the_post(); ?>
@@ -324,12 +323,21 @@ Template Post Type: post, page, product
 				</div>
 			</div>
 		</div-->
-		<div class="card_show_btn">
-			<div class="more_btn loadmore">
-				<input type="checkbox" name="card_show_btn" id="card_show_btn">
-				<label for="card_show_btn">показать больше</label>
-			</div>
 		</div>
+		<?php
+		
+$page = get_query_var('paged') ? get_query_var('paged') : 1;
+$max_pages = $wp_query->max_num_pages;
+
+
+
+echo '<div id="loadmore" class="card_show_btn container">
+<div class="more_btn">
+<div class="loadmore" data-max-pages="' . $max_pages . '" data-page="' . $page . '" >показать больше</div>
+</div>';
+
+wp_reset_query();
+?> 
 	</div>
 </div>
 

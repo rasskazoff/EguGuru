@@ -179,6 +179,7 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
 function blog_scripts() {
     // Register the script
     wp_register_script( 'custom-script', get_stylesheet_directory_uri(). '/assets/js/more.ajax.js', array('jquery'), false, true );
@@ -193,6 +194,9 @@ function blog_scripts() {
     // Enqueued script with localized data.
     wp_enqueue_script( 'custom-script' );
 }
+
+
+
 add_action( 'wp_enqueue_scripts', 'blog_scripts' );
 
 add_action('wp_ajax_load_posts_by_ajax', 'load_posts_by_ajax_callback');
@@ -203,7 +207,7 @@ function load_posts_by_ajax_callback() {
     $args = array(
         'post_type' => 'cources',
         'post_status' => 'publish',
-        'posts_per_page' => '1',
+        'posts_per_page' => 1,
         'paged' => $_POST['page'],
     );
     $blog_posts = new WP_Query( $args );
