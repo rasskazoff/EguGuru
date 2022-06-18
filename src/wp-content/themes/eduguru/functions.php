@@ -178,9 +178,10 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
-
-wp_enqueue_script("eduguru-js", get_template_directory_uri() . "/assets/js/scripts.min.js", array("jquery"), "", true );
-
+//Подключение JS темы
+wp_enqueue_script('jquery');
+wp_enqueue_script("eduguru-js", get_template_directory_uri() . "/assets/js/scripts.min.js" );
+//ajax вывод постов
 add_action("wp_ajax_load_more", "load_posts");
 add_action("wp_ajax_nopriv_load_more", "load_posts");
 function load_posts()

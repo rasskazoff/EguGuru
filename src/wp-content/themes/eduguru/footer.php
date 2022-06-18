@@ -14,7 +14,7 @@
 		<div class="footer container">
 			<div class="footer_menu">
 				<div class="footer_logo">
-					<img src="//localhost:3000/wp-content/themes/eduguru/assets/images/logo.svg" alt="logo">
+					<img src="<?php echo get_bloginfo('template_url');?>/assets/images/logo.svg" alt="logo">
 				</div>
 				<nav>
 					<?php

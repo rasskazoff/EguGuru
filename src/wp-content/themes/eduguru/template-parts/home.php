@@ -31,12 +31,23 @@ Template Post Type: post, page, product
 
 <div class="filter container">
 	<h2 class="filter_tittle">Выберите нужные параметры:</h2>
-	
+
 	<div class="filter_items">
-		<div class="filter_item">
+		<?php
+		$tags = get_tags();	
+		foreach ( $tags as $tag ) {
+			$tag_link = get_tag_link( $tag->term_id );
+			
+			$html .= '<div class="filter_item">';
+			$html .= "<input type='checkbox' name={$tag->slug} id={$tag->slug}>";
+			$html .= "<label for={$tag->slug}>{$tag->name}</label></div>";
+		}
+		echo $html;
+		?>
+		<!--div class="filter_item">
 			<input type="checkbox" name="filter_1" id="filter_1">
 			<label for="filter_1">с носителем языка</label>
-		</div>
+		</!--div>
 
 		<div class="filter_item">
 			<input type="checkbox" name="filter_2" id="filter_2">
@@ -58,99 +69,10 @@ Template Post Type: post, page, product
 			<label for="filter_5">индивидуально</label>
 		</div>
 
-		<div class="filter_item">
+		<div-- class="filter_item">
 			<input type="checkbox" name="filter_6" id="filter_6">
 			<label for="filter_6">с мини группе</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_1" id="filter_1">
-			<label for="filter_1">с носителем языка</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_2" id="filter_2">
-			<label for="filter_2">с русскоязычным учителем</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_3" id="filter_3">
-			<label for="filter_3">бесплатный пробный урок</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_4" id="filter_4">
-			<label for="filter_4">в группе</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_5" id="filter_5">
-			<label for="filter_5">индивидуально</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_6" id="filter_6">
-			<label for="filter_6">с мини группе</label>
-		</div>
-		<div class="filter_item">
-			<input type="checkbox" name="filter_1" id="filter_1">
-			<label for="filter_1">с носителем языка</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_2" id="filter_2">
-			<label for="filter_2">с русскоязычным учителем</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_3" id="filter_3">
-			<label for="filter_3">бесплатный пробный урок</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_4" id="filter_4">
-			<label for="filter_4">в группе</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_5" id="filter_5">
-			<label for="filter_5">индивидуально</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_6" id="filter_6">
-			<label for="filter_6">с мини группе</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_1" id="filter_1">
-			<label for="filter_1">с носителем языка</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_2" id="filter_2">
-			<label for="filter_2">с русскоязычным учителем</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_3" id="filter_3">
-			<label for="filter_3">бесплатный пробный урок</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_4" id="filter_4">
-			<label for="filter_4">в группе</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_5" id="filter_5">
-			<label for="filter_5">индивидуально</label>
-		</div>
-
-		<div class="filter_item">
-			<input type="checkbox" name="filter_6" id="filter_6">
-			<label for="filter_6">с мини группе</label>
-		</div>
+		</div-->
 	</div>
 	<div class="more_btn">
 		<input type="checkbox" name="filter_more" id="filter_more">
@@ -178,7 +100,7 @@ Template Post Type: post, page, product
 		),
 		*/
 		));?>
-
+		
 		<?php function true_wordform($num, $form_for_1, $form_for_2, $form_for_5){
 					$num = abs($num) % 100; // берем число по модулю и сбрасываем сотни (делим на 100, а остаток присваиваем переменной $num)
 					$num_x = $num % 10; // сбрасываем десятки и записываем в новую переменную
@@ -193,34 +115,19 @@ Template Post Type: post, page, product
 				?>
 
 		<?php
-		wp_tag_cloud( [
-			'smallest'  => 8,
-			'largest'   => 22,
-			'unit'      => 'pt',
-			'number'    => 45,
-			'format'    => 'flat',
-			'separator' => "\n",
-			'orderby'   => 'name',
-			'order'     => 'ASC',
-			'exclude'   => null,
-			'include'   => null,
-			'link'      => 'view',
-			'taxonomy'  => 'post_tag',
-			'echo'      => true,
-			'topic_count_text_callback' => 'default_topic_count_text',
-		] );
 		// Получить кол-во постов в определенной категории (типе записи)
 		$count_posts = wp_count_posts("cources"); // post, page, custom_post_type
 		$published_posts_all = $count_posts->publish;  // общее кол-во записей
-		$published_posts_remain = $published_posts_all - 2;   // оставшееся кол-во записей
+		//$published_posts_remain = $published_posts_all - 2;   // оставшееся кол-во записей
 		?>
 		<div class="quantity_results"><?php echo true_wordform($published_posts_all, 'Найден', 'Найдено', 'Найдено') . ' ' . $published_posts_all . ' ' . true_wordform($published_posts_all, 'вариант', 'варианта', 'вариантов'); ?>:</div>
-
+		
 		<?php if ($posts->have_posts()) : ?>
 			<?php while ($posts->have_posts()) : $posts->the_post(); ?>
 				<?php get_template_part('template-parts/content', 'cources'); ?>
 			<?php endwhile; ?>
 		<?php endif; ?>
+		<?php echo $counter; ?>
 		<?php wp_reset_postdata(); ?>
 
 		<?php // AJAX загрузка постов
@@ -245,15 +152,6 @@ Template Post Type: post, page, product
 		</div>
 			
 		<?php } ?>
-
-
-<div class="btn--load"
-data-tag = "v-gruppe"
-data-tpl="cources"
->
-Тест
-</div>
-
 
 	</div>	
 </div>

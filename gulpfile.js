@@ -52,7 +52,7 @@ gulp.task('styles', function() {
 // Обьединяем файлы скриптов, сжимаем и переменовываем
 gulp.task('scripts', function() {
 	return gulp.src([
-		'src/wp-content/themes/eduguru/assets/libs/jquery/dist/jquery-3.6.0.min.js',
+		//'src/wp-content/themes/eduguru/assets/libs/jquery/dist/jquery-3.6.0.min.js',
 		'src/wp-content/themes/eduguru/assets/js/ajax-load-more.js',
 		'src/wp-content/themes/eduguru/assets/js/more-btn.js',
 		'src/wp-content/themes/eduguru/assets/js/global.js',
@@ -102,9 +102,9 @@ gulp.task('deploy-site', function() {
 // Отгрузка только шаблона на хостинг
 gulp.task('deploy-theme', function() {
 	var conn = ftp.create({
-		host:      '11.111.111.111', // or domain
-		user:      'user ftp',
-		password:  'password ftp',
+		host:      'a304639.ftp.mchost.ru', // or domain
+		user:      'a304639_a239912',
+		password:  'Od13Uy0mN1',
 		parallel:  10,
 		log: gutil.log
 	});
@@ -112,7 +112,7 @@ gulp.task('deploy-theme', function() {
 	'src/wp-content/themes/eduguru/**', // Путь до шаблона у вас на компьютере
 	];
 	return gulp.src(globs, {buffer: false})
-	.pipe(conn.dest('/www/domain.com/wp-content/themes/eduguru/')); // Путь до шаблона на хостинге
+	.pipe(conn.dest('/httpdocs/wp-content/themes/eduguru/')); // Путь до шаблона на хостинге
 });
 
 
