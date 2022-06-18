@@ -1,0 +1,46 @@
+*
+    font-family: 'Inter', sans-serif
+    &::before
+        position: relative
+        bottom: -2px
+        padding-right: 10px
+.container
+    width: 100%
+    max-width: 1200px
+    margin: auto
+ul.menu
+        padding: 20px 0
+        margin: 0
+        li
+            display: inline-flex
+            font-size: 20px
+        a
+            text-decoration: none
+.more_btn
+    color: #65A7FF
+    font-size: 16px
+    font-weight: 700
+    cursor: pointer
+    input
+        display: none
+    label,.loadmore
+        display: flex
+        align-self: center
+        text-decoration: none
+        color: inherit
+        cursor: inherit
+        &::before
+            content: url(../images/arrow.svg)
+    :checked
+        &~label
+            &::before
+                bottom: 2px
+                transform: scaleY(-1)
+.btn
+    background: #65A7FF
+    color: #ffffff
+    padding: 15px 25px
+    border-radius: 10px
+    text-decoration: none
+    &:visited
+        color: #ffffff

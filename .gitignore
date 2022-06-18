@@ -1,5 +1,9 @@
 node_modules/
 references/
 src/*
-!**/eduguru/
+!src/wp-content
+src/wp-content/*
+!src/wp-content/themes
+src/wp-content/themes/*
+!src/wp-content/themes/eduguru
 **/.DS_Store

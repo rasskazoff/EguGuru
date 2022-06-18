@@ -1,0 +1,36 @@
+.filter
+    .filter_tittle
+        font-size: 24px
+        font-weight: 400
+        margin: 20px 0
+    [type="checkbox"]
+        display: none
+    .filter_items
+        display: inline-block
+        max-height: 130px
+        overflow: hidden
+        &.show
+            max-height: fit-content
+        .filter_item
+            display: inherit
+            padding: 10px 10px 10px 0
+            font-size: 14px
+        :checked
+            &~label
+                background: #EFF1F4
+                border-color: #EFF1F4
+                &::after
+                    content: url(../images/x.svg)
+                    width: 16px
+                    height: 16px
+                    padding: 0 10px
+                    margin: auto
+        label
+            padding: 10px 20px
+            border-radius: 25px
+            border: 1px solid #C4C4C4
+            display: flex
+            cursor: pointer
+    .more_btn
+        padding-top: 20px
+        padding-bottom: 35px
