@@ -160,7 +160,105 @@ Template Post Type: post, page, product
 <div class="cards_wrap">
 	<div class="cards container">
 	
-		<?php		
+		<?php
+		$posts = new WP_Query(array(
+		"post_type"        => "cources",                  		# post, page, custom_post_type
+		"post_status"      => "publish",                       # статус записи
+		"posts_per_page"   => 2,                              # кол-во постов вывода/загрузки
+		"tag" => $_GET["tags"]								#метки
+		/*
+		"category_name"    => "{название_рубрики}",            # если рубрика
+
+		"tax_query" => array(                                  # если элемент (термин) таксономии
+			array(
+				"taxonomy" => "{название_таксономии}",         # таксономия
+				"field"    => "slug",                          # slug/id
+				"terms"    => "{ярлык/id_элемента_таксономии}" # термин (ярлык/id)
+			)
+		),
+		*/
+		));?>
+
+		<?php function true_wordform($num, $form_for_1, $form_for_2, $form_for_5){
+					$num = abs($num) % 100; // берем число по модулю и сбрасываем сотни (делим на 100, а остаток присваиваем переменной $num)
+					$num_x = $num % 10; // сбрасываем десятки и записываем в новую переменную
+					if ($num > 10 && $num < 20) // если число принадлежит отрезку [11;19]
+						return $form_for_5;
+					if ($num_x > 1 && $num_x < 5) // иначе если число оканчивается на 2,3,4
+						return $form_for_2;
+					if ($num_x == 1) // иначе если оканчивается на 1
+						return $form_for_1;
+					return $form_for_5;
+				}
+				?>
+
+		<?php
+		wp_tag_cloud( [
+			'smallest'  => 8,
+			'largest'   => 22,
+			'unit'      => 'pt',
+			'number'    => 45,
+			'format'    => 'flat',
+			'separator' => "\n",
+			'orderby'   => 'name',
+			'order'     => 'ASC',
+			'exclude'   => null,
+			'include'   => null,
+			'link'      => 'view',
+			'taxonomy'  => 'post_tag',
+			'echo'      => true,
+			'topic_count_text_callback' => 'default_topic_count_text',
+		] );
+		// Получить кол-во постов в определенной категории (типе записи)
+		$count_posts = wp_count_posts("cources"); // post, page, custom_post_type
+		$published_posts_all = $count_posts->publish;  // общее кол-во записей
+		$published_posts_remain = $published_posts_all - 2;   // оставшееся кол-во записей
+		?>
+		<div class="quantity_results"><?php echo true_wordform($published_posts_all, 'Найден', 'Найдено', 'Найдено') . ' ' . $published_posts_all . ' ' . true_wordform($published_posts_all, 'вариант', 'варианта', 'вариантов'); ?>:</div>
+
+		<?php if ($posts->have_posts()) : ?>
+			<?php while ($posts->have_posts()) : $posts->the_post(); ?>
+				<?php get_template_part('template-parts/content', 'cources'); ?>
+			<?php endwhile; ?>
+		<?php endif; ?>
+		<?php wp_reset_postdata(); ?>
+
+		<?php // AJAX загрузка постов
+		if ($posts->max_num_pages > 1) { ?>
+		<script>
+			var current_page = 1;
+		</script>
+		</div>
+		<div
+			class="btn--load card_show_btn container"
+			data-param-posts='<?= json_encode($posts->query_vars); ?>' 
+			data-max-pages="<?= $posts->max_num_pages; ?>"
+			data-tpl="cources"
+		>
+			<div class="more_btn">
+				<div class="loadmore">
+					показать больше
+					<!--span>< ?= $published_posts_remain; ?></span> из
+					<span>< ?= $published_posts_all; ?></span-->
+				</div>
+			</div>
+		</div>
+			
+		<?php } ?>
+
+
+<div class="btn--load"
+data-tag = "v-gruppe"
+data-tpl="cources"
+>
+Тест
+</div>
+
+
+	</div>	
+</div>
+		
+<?php		/*
 		$args = array(
 			'post_type' => 'cources',
 			'post_status' => 'publish',
@@ -337,7 +435,7 @@ echo '<div id="loadmore" class="card_show_btn container">
 </div>';
 
 wp_reset_query();
-?> 
+*/?> 
 	</div>
 </div>
 

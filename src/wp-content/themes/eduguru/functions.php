@@ -179,46 +179,31 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+wp_enqueue_script("eduguru-js", get_template_directory_uri() . "/assets/js/scripts.min.js", array("jquery"), "", true );
 
-function blog_scripts() {
-    // Register the script
-    wp_register_script( 'custom-script', get_stylesheet_directory_uri(). '/assets/js/more.ajax.js', array('jquery'), false, true );
-  
-    // Localize the script with new data
-    $script_data_array = array(
-        'ajaxurl' => admin_url( 'admin-ajax.php' ),
-        'security' => wp_create_nonce( 'load_more_posts' ),
-    );
-    wp_localize_script( 'custom-script', 'blog', $script_data_array );
-  
-    // Enqueued script with localized data.
-    wp_enqueue_script( 'custom-script' );
-}
+add_action("wp_ajax_load_more", "load_posts");
+add_action("wp_ajax_nopriv_load_more", "load_posts");
+function load_posts()
+{
 
+	$posts = new WP_Query(array(
+		"post_type"        => "cources",                  		# post, page, custom_post_type
+		"post_status"      => "publish",                       # статус записи
+		"posts_per_page"   => 2,                              # кол-во постов вывода/загрузки
+		"paged" => $_POST["page"] + 1,
+		//"tag" => "v-gruppe"
+	));
+    $html = '';
 
+    if ($posts->have_posts()) : while ($posts->have_posts()) : $posts->the_post();
 
-add_action( 'wp_enqueue_scripts', 'blog_scripts' );
+            if ($_POST["tpl"] === "cources") {
+                $html .= get_template_part('template-parts/content', 'cources');
+            }
 
-add_action('wp_ajax_load_posts_by_ajax', 'load_posts_by_ajax_callback');
-add_action('wp_ajax_nopriv_load_posts_by_ajax', 'load_posts_by_ajax_callback');
+        endwhile;
+    endif;
 
-function load_posts_by_ajax_callback() {
-    check_ajax_referer('load_more_posts', 'security');
-    $args = array(
-        'post_type' => 'cources',
-        'post_status' => 'publish',
-        'posts_per_page' => 1,
-        'paged' => $_POST['page'],
-    );
-    $blog_posts = new WP_Query( $args );
-    ?>
-  
-    <?php if ( $blog_posts->have_posts() ) : ?>
-        <?php while ( $blog_posts->have_posts() ) : $blog_posts->the_post(); ?>
-			<?php get_template_part( 'template-parts/content', 'cources' ); ?>
-        <?php endwhile; ?>
-        <?php wp_reset_postdata(); ?>
-    <?php endif; ?>
-    <?php
-    wp_die();
+    wp_reset_postdata();
+    die($html);
 }
