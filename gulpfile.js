@@ -53,9 +53,9 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
 	return gulp.src([
 		//'src/wp-content/themes/eduguru/assets/libs/jquery/dist/jquery-3.6.0.min.js',
-		'src/wp-content/themes/eduguru/assets/js/ajax-load-more.js',
-		'src/wp-content/themes/eduguru/assets/js/more-btn.js',
-		'src/wp-content/themes/eduguru/assets/js/global.js',
+		'src/wp-content/themes/eduguru/assets/libs/js/filter.js',
+		'src/wp-content/themes/eduguru/assets/libs/js/ajax-load-more.js',
+		'src/wp-content/themes/eduguru/assets/libs/js/more-btn.js',
 		//'src/wp-content/themes/twentyseventeen/assets/js/common.js', // Always at the end
 		])
 	.pipe(concat('scripts.min.js'))

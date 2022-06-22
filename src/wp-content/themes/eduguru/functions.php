@@ -179,32 +179,66 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 //Подключение JS темы
-wp_enqueue_script('jquery');
-wp_enqueue_script("eduguru-js", get_template_directory_uri() . "/assets/js/scripts.min.js" );
+function add_scripts(){
+
+	wp_enqueue_script('jquery');
+	wp_enqueue_script("eduguru-js", get_template_directory_uri() . "/assets/js/scripts.min.js");
+ }
+ 
+ add_action( 'wp_enqueue_scripts', 'add_scripts'); 
+
+//Склонение слов
+function true_wordform($num, $form_for_1, $form_for_2, $form_for_5){
+	$num = abs($num) % 100;
+	$num_x = $num % 10;
+	if ($num > 10 && $num < 20)
+		return $form_for_5;
+	if ($num_x > 1 && $num_x < 5)
+		return $form_for_2;
+	if ($num_x == 1) 
+		return $form_for_1;
+	return $form_for_5;
+}
 //ajax вывод постов
 add_action("wp_ajax_load_more", "load_posts");
 add_action("wp_ajax_nopriv_load_more", "load_posts");
 function load_posts()
-{
-
+{	
+	
 	$posts = new WP_Query(array(
-		"post_type"        => "cources",                  		# post, page, custom_post_type
-		"post_status"      => "publish",                       # статус записи
-		"posts_per_page"   => 2,                              # кол-во постов вывода/загрузки
-		"paged" => $_POST["page"] + 1,
-		//"tag" => "v-gruppe"
-	));
-    $html = '';
+		"post_type"        => "cources",
+		"post_status"      => "publish",
+		"posts_per_page"   => $_POST['posts'],
+		"paged" => $_POST["page"],
+		"tag" => $_POST["tags"],
+        "cat" => $current_cat_id
+		));
+	$count = $posts->found_posts;
+	$count = true_wordform($count, 'Найден', 'Найдено', 'Найдено') . ' ' . $count . ' ' . true_wordform($count, 'вариант', 'варианта', 'вариантов');
 
     if ($posts->have_posts()) : while ($posts->have_posts()) : $posts->the_post();
 
-            if ($_POST["tpl"] === "cources") {
                 $html .= get_template_part('template-parts/content', 'cources');
-            }
 
         endwhile;
     endif;
 
     wp_reset_postdata();
+
+	if( !empty($_POST['filter'])){
+		$html.= '<script>
+				jQuery(function ($) {
+					$(".quantity_results").text("'.$count.'")
+					const button = $(".btn--load");
+					if ('.$posts->max_num_pages.' <= 1) {
+						button.hide();
+						console.log("FUNCTION HIDE");
+					}else{
+						button.show();
+					}
+				})
+				</script>';
+	}
+
     die($html);
 }
