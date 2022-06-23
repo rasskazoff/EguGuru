@@ -57,6 +57,7 @@
 								<div class="card_step_desc"><?= get_sub_field('vozrast') ?></div>
 							<?php endif; ?>
 						</div>
+			
 					</div>
 					<?php endwhile; ?>
 								
