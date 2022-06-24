@@ -4,13 +4,17 @@
 	<p class="description"><?php the_field('description'); ?></p>
 
 	<?php
+		$category = get_queried_object();
+        $current_cat_id = $category->term_id;
+        $current_cat_name = $category->name;
+
 		//получаем список постов в категории
 		$args = array(
 			'post_type' => 'cources',
 			'posts_per_page' => -1,
 			"post_status"      => "publish",
 			'orderby' => 'id',
-			'cat' => '13',
+			'cat' => $current_cat_id,
 			'order' => 'DESC'
 		);
 		
@@ -22,34 +26,53 @@
 		foreach ( $posts as $post ) {
 			setup_postdata( $post );
 			$title = get_the_title( $post->ID );
-			$id = $post->ID;  										//получаем id постов в категории
-			$price[] = get_fields($id)['knopka']['czena'];			//получаем значение поля цена по id поста
-			$school[] = get_fields(107)['logo_wrap']['school_url']['title'];  //получаем названия школ из tittle url logo
+			$id = $post->ID;  													//получаем id постов в категории
+			$price[] = get_fields($id)['knopka']['czena'];						//получаем значение поля цена по id поста
+			$school[] = get_fields($id)['logo_wrap']['school_url']['title'];    //получаем названия школ из tittle url logo
+
+			$promo_discount = get_fields($id)['promo']['promo_discount'];
+			$promo_tittle = get_fields($id)['promo']['promo_tittle'];
+			$promo_note = get_fields($id)['promo']['promo_note'];
+
+			if (!empty($promo_discount) && !empty($promo_tittle) && !empty($promo_note)) {
+				$promo[] = 'promo'.$id;
+			};
 		}
 		
-		//print_r(get_fields(107)['promo']['promo_discount']);
-		print_r(get_fields(107)['promo']);
-		//print_r($school);
+		$school = array_map('mb_strtolower', array_map('trim', $school));   //переводим массив в нижний регистр и удаляем пробелы для приведения к единому виду
+		$school = array_unique($school);									//Удаляем дубли
+		$school_count = count($school);
 
+		$promo_count = count($promo);
 		wp_reset_postdata();
+		
+		$parent_cat = get_ancestors( $current_cat_id, 'category' ); 		// получаем всех родителей категории
+		if (!empty($parent_cat)){
+			$parent_cat = array_reverse( $parent_cat ); 			// изменяем порядок в массиве на обратный(от старшего к младшему)
+			$parent_cat = get_cat_name( $parent_cat[0] ); 			// название старшей категории.
+		}else{
+			$parent_cat = $current_cat_name;
+		}
+		$parent_cat = mb_strtolower(trim($parent_cat));			//переводим массив в нижний регистр и удаляем пробелы для приведения к единому виду
+		$parent_cat = array_reverse(explode('для', $parent_cat ))[0];
 	?>
 
 	<div class="adv">
 		<div class="adv_item">
 			<div class="adv_item_num"><?php echo $count ?></div>
-			<div class="adv_item_text"><span><?php echo true_wordform($count, 'курс', 'курса', 'курсов') ?> по английскому языку</span> для детей найдено</div>
+			<div class="adv_item_text"><span><?php echo true_wordform($count, 'курс', 'курса', 'курсов') ?> {по английскому языку}</span> для <?php echo $parent_cat ?> найдено</div>
 		</div>
 		<div class="adv_item">
 			<div class="adv_item_num"><?php echo min($price); ?></div>
 			<div class="adv_item_text"><span>₽ минимальная цена</span> за урок</div>
 		</div>
 		<div class="adv_item">
-			<div class="adv_item_num">10</div>
-			<div class="adv_item_text"><span>школ</span> найдено</div>
+			<div class="adv_item_num"><?php echo $school_count; ?></div>
+			<div class="adv_item_text"><span><?php echo true_wordform($school_count, 'школа</span> найдена', 'школы</span> найдено', 'школ</span> найдено') ?></div>
 		</div>
 		<div class="adv_item">
-			<div class="adv_item_num">10</div>
-			<div class="adv_item_text"><span>купонов на скидки</span> найдено</div>
+			<div class="adv_item_num"><?php echo $promo_count; ?></div>
+			<div class="adv_item_text"><span><?php echo true_wordform($promo_count, 'купон на скидку</span> найден', 'купона на скидки</span> найдено', 'купонов на скидки</span> найдено') ?></div>
 		</div>
 	</div>
 </div>
@@ -79,10 +102,6 @@
 <div class="cards_wrap">
 	<div class="cards container">
 		<?php
-        $category = get_queried_object();
-        $current_cat_id = $category->term_id;
-        $current_cat_name = $category->name;
-
 		$posts = new WP_Query(array(
 		"post_type"        => "cources",                  		# post, page, custom_post_type
 		"post_status"      => "publish",                       # статус записи
