@@ -1,13 +1,16 @@
 <?php get_header(); ?>
+<?php
+$category = get_queried_object();
+$current_cat_id = $category->term_id;
+$current_cat_name = $category->name;
+
+if ($category->count > 0) : ?>
+
 <div class="main container">
 	<h1 class="tittle"><?php echo single_cat_title(); ?></h1>
 	<p class="description"><?php the_field('description'); ?></p>
 
 	<?php
-		$category = get_queried_object();
-        $current_cat_id = $category->term_id;
-        $current_cat_name = $category->name;
-
 		//получаем список постов в категории
 		$args = array(
 			'post_type' => 'cources',
@@ -20,7 +23,6 @@
 		
 		$posts = get_posts( $args );
 		$count = count($posts);
-		
 		
 
 		foreach ( $posts as $post ) {
@@ -99,6 +101,9 @@
 		<label for="filter_more">показать больше параметров</label>
 	</div>
 </div>
+
+<?php endif; // end if count?>
+
 <div class="cards_wrap">
 	<div class="cards container">
 		<?php
