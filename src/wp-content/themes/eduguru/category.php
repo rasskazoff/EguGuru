@@ -2,13 +2,45 @@
 <div class="main container">
 	<h1 class="tittle"><?php echo single_cat_title(); ?></h1>
 	<p class="description"><?php the_field('description'); ?></p>
+
+	<?php
+		//получаем список постов в категории
+		$args = array(
+			'post_type' => 'cources',
+			'posts_per_page' => -1,
+			"post_status"      => "publish",
+			'orderby' => 'id',
+			'cat' => '13',
+			'order' => 'DESC'
+		);
+		
+		$posts = get_posts( $args );
+		$count = count($posts);
+		
+		
+
+		foreach ( $posts as $post ) {
+			setup_postdata( $post );
+			$title = get_the_title( $post->ID );
+			$id = $post->ID;  										//получаем id постов в категории
+			$price[] = get_fields($id)['knopka']['czena'];			//получаем значение поля цена по id поста
+			$school[] = get_fields(107)['logo_wrap']['school_url']['title'];  //получаем названия школ из tittle url logo
+		}
+		
+		//print_r(get_fields(107)['promo']['promo_discount']);
+		print_r(get_fields(107)['promo']);
+		//print_r($school);
+
+		wp_reset_postdata();
+	?>
+
 	<div class="adv">
 		<div class="adv_item">
-			<div class="adv_item_num">18</div>
-			<div class="adv_item_text"><span>курсов по английскому языку</span> для детей найдено</div>
+			<div class="adv_item_num"><?php echo $count ?></div>
+			<div class="adv_item_text"><span><?php echo true_wordform($count, 'курс', 'курса', 'курсов') ?> по английскому языку</span> для детей найдено</div>
 		</div>
 		<div class="adv_item">
-			<div class="adv_item_num">350</div>
+			<div class="adv_item_num"><?php echo min($price); ?></div>
 			<div class="adv_item_text"><span>₽ минимальная цена</span> за урок</div>
 		</div>
 		<div class="adv_item">
@@ -46,7 +78,6 @@
 </div>
 <div class="cards_wrap">
 	<div class="cards container">
-	
 		<?php
         $category = get_queried_object();
         $current_cat_id = $category->term_id;
