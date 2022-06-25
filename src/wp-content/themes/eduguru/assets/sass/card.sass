@@ -30,7 +30,7 @@
                 &:visited
                     color: inherit
                 img
-                    padding: 100px 50px 0
+                    padding: 110px 50px 0
             .card_tittle
                 margin: 30px 0
     .card_top_label
@@ -67,14 +67,14 @@
                     align-self: center
                 .card_step_desc
                     display: grid
-            .step-1 .card_step_tittle::before
-                content: url(../images/card_step-1.svg)
-            .step-2 .card_step_tittle::before
-                content: url(../images/card_step-2.svg)
-            .step-3 .card_step_tittle::before
-                content: url(../images/card_step-3.svg)
-            .step-4 .card_step_tittle::before
-                content: url(../images/card_step-4.svg)
+            .step .card_step_tittle::before
+                content: url(../images/card_step.svg)
+            .person .card_step_tittle::before
+                content: url(../images/card_person.svg)
+            .format .card_step_tittle::before
+                content: url(../images/card_format.svg)
+            .level .card_step_tittle::before
+                content: url(../images/card_level.svg)
         .card_actions
             display: flex
             margin-top: auto
@@ -128,9 +128,6 @@
         .detail_item
             font-size: 14px
             margin-bottom: 25px
-            .detail_tittle
-                font-weight: 700
-                margin-bottom: 5px
     .card_show_btn
         display: flex
         justify-content: center

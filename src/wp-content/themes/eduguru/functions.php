@@ -242,3 +242,14 @@ function load_posts()
 
     die($html);
 }
+
+function partner(){
+	
+	if (isset($_GET['action'])){
+		if ($_GET['action'] == 'partner'){
+			if (isset($_GET['id'])){
+				echo '<style>body{display:none}</style><script>window.location.href="'.get_fields($_GET['id'])['knopka']['partner_url'].'"</script>';				
+			}
+		}
+	}
+}

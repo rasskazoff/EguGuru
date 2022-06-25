@@ -23,24 +23,23 @@ if ($category->count > 0) : ?>
 		
 		$posts = get_posts( $args );
 		$count = count($posts);
-		
 
 		foreach ( $posts as $post ) {
 			setup_postdata( $post );
 			$title = get_the_title( $post->ID );
-			$id = $post->ID;  													//получаем id постов в категории
-			$price[] = get_fields($id)['knopka']['czena'];						//получаем значение поля цена по id поста
-			$school[] = get_fields($id)['logo_wrap']['school_url']['title'];    //получаем названия школ из tittle url logo
+			$id = $post->ID;  																								//получаем id постов в категории
+			$price[] = isset(get_fields($id)['knopka']['czena'])?get_fields($id)['knopka']['czena']:'';						//получаем значение поля цена по id поста
+			$school[] = isset(get_fields($id)['school'])?get_fields($id)['school']:'';    									//получаем названия школ из tittle url logo
 
-			$promo_discount = get_fields($id)['promo']['promo_discount'];
-			$promo_tittle = get_fields($id)['promo']['promo_tittle'];
-			$promo_note = get_fields($id)['promo']['promo_note'];
+			$promo_discount = isset(get_fields($id)['promo']['promo_discount'])?get_fields($id)['promo']['promo_discount']:'';
+			$promo_tittle = isset(get_fields($id)['promo']['promo_tittle'])?get_fields($id)['promo']['promo_tittle']:'';
+			$promo_note = isset(get_fields($id)['promo']['promo_note'])?get_fields($id)['promo']['promo_note']:'';
 
 			if (!empty($promo_discount) && !empty($promo_tittle) && !empty($promo_note)) {
 				$promo[] = 'promo'.$id;
 			};
 		}
-		
+
 		$school = array_map('mb_strtolower', array_map('trim', $school));   //переводим массив в нижний регистр и удаляем пробелы для приведения к единому виду
 		$school = array_unique($school);									//Удаляем дубли
 		$school_count = count($school);
@@ -82,19 +81,21 @@ if ($category->count > 0) : ?>
 <div class="filter container">
 	<h2 class="filter_tittle">Выберите нужные параметры:</h2>
 
-	<div class="filter_items">
-		<?php
-		$tags = get_tags();
-        $html = '';
-		foreach ( $tags as $tag ) {
-			$tag_link = get_tag_link( $tag->term_id );
+	<div class="filter_wrap">
+		<div class="filter_items">
+			<?php
+			$tags = get_tags();
+			$html = '';
+			foreach ( $tags as $tag ) {
+				$tag_link = get_tag_link( $tag->term_id );
 
-			$html .= '<div class="filter_item">';
-			$html .= "<input type='checkbox' name={$tag->slug} id={$tag->slug}>";
-			$html .= "<label for={$tag->slug}>{$tag->name}</label></div>";
-		}
-		echo $html;
-		?>
+				$html .= '<div class="filter_item">';
+				$html .= "<input type='checkbox' name={$tag->slug} id={$tag->slug}>";
+				$html .= "<label for={$tag->slug}>{$tag->name}</label></div>";
+			}
+			echo $html;
+			?>
+		</div>
 	</div>
 	<div class="more_btn">
 		<input type="checkbox" name="filter_more" id="filter_more">
@@ -129,6 +130,7 @@ if ($category->count > 0) : ?>
 		<?php wp_reset_postdata(); ?>
 		
 		</div>
+		<?php if ($category->count > 0) : ?>
 		<div
 			class="btn--load card_show_btn container"
 			data-max-pages="<?= $posts->max_num_pages; ?>"
@@ -141,7 +143,7 @@ if ($category->count > 0) : ?>
 				</div>
 			</div>
 		</div>
-
+		<?php endif; // end if count?>
 	</div>	
 </div>
 	

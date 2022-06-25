@@ -13,7 +13,7 @@
 				<div class="card_logo">
 
 					<?php if (get_sub_field('school_url')) : ?>
-					<a href="<?= get_sub_field('school_url')['url'] ?>" target="<?= get_sub_field('school_url')['target'] ?>">
+					<a href="<?= get_sub_field('school_url') ?>" target="_blank">
 					<?php endif; ?>
 
 						<?php if (get_sub_field('logotip')) : ?>
@@ -21,7 +21,7 @@
 						<?php endif; ?>
 					
 					<?php if (get_sub_field('school_url')) : ?>
-						<p><?= get_sub_field('school_url')['title'] ?></p>
+						<p><?= parse_url(get_sub_field('school_url'),PHP_URL_HOST)?></p>
 					</a>
 					<?php endif; ?>
 
@@ -29,76 +29,101 @@
 				<?php endwhile; ?>
 
 				<div class="card_content">
-					<h2 class="card_tittle"><?php the_title(); ?></h2>
+					<h2 class="card_tittle"><?php the_title();?><?php if( get_field('school') ){ echo ' в '; the_field('school'); }?></h2>
 
 					<?php while (have_rows('parametry')) : the_row(); ?>
 					<div class="card_steps">
-						<div class="card_step step-1">
-							<div class="card_step_tittle">пробный урок</div>
-							<?php if (get_sub_field('probnyj_urok')) : ?>
-								<div class="card_step_desc"><?= get_sub_field('probnyj_urok') ?></div>
-							<?php endif; ?>
-						</div>
-						<div class="card_step step-2">
-							<div class="card_step_tittle">учитель</div>
-							<?php if (get_sub_field('uchitel')) : ?>
-								<div class="card_step_desc"><?= get_sub_field('uchitel') ?></div>
-							<?php endif; ?>
-						</div>
-						<div class="card_step step-3">
-							<div class="card_step_tittle">формат</div>
-							<?php if (get_sub_field('format')) : ?>
+
+						<?php if (get_sub_field('format')) : ?>
+						<div class="card_step format">
+							<div class="card_step_tittle">Формат</div>
 								<div class="card_step_desc"><?= get_sub_field('format') ?></div>
-							<?php endif; ?>
 						</div>
-						<div class="card_step step-4">
-							<div class="card_step_tittle">возраст</div>
-							<?php if (get_sub_field('vozrast')) : ?>
-								<div class="card_step_desc"><?= get_sub_field('vozrast') ?></div>
-							<?php endif; ?>
+						<?php endif; ?>
+
+						<?php if (get_sub_field('sertifikatdiplom')) : ?>
+						<div class="card_step step">
+							<div class="card_step_tittle">Сертификат/диплом</div>
+								<div class="card_step_desc"><?= get_sub_field('sertifikatdiplom') ?></div>
 						</div>
+						<?php endif; ?>
+
+						<?php if (get_sub_field('trudoustrojstvo')) : ?>
+						<div class="card_step person">
+							<div class="card_step_tittle">Трудоустройство</div>
+								<div class="card_step_desc"><?= get_sub_field('trudoustrojstvo') ?></div>
+						</div>
+						<?php endif; ?>
+
+						<?php if (get_sub_field('uroven')) : ?>
+						<div class="card_step level">
+							<div class="card_step_tittle">Уровень</div>
+								<div class="card_step_desc"><?= get_sub_field('uroven') ?></div>
+						</div>
+						<?php endif; ?>
+
+						<?php if (get_sub_field('srok_obucheniya')) : ?>
+						<div class="card_step step">
+							<div class="card_step_tittle">Срок обучения</div>
+								<div class="card_step_desc"><?= get_sub_field('srok_obucheniya') ?></div>
+						</div>
+						<?php endif; ?>
+
+						<?php if (get_sub_field('data_starta')) : ?>
+						<div class="card_step step">
+							<div class="card_step_tittle">Дата старта</div>
+								<div class="card_step_desc"><?= get_sub_field('data_starta') ?></div>
+						</div>
+						<?php endif; ?>
+
+						<?php if (get_sub_field('rassrochka')) : ?>
+						<div class="card_step step">
+							<div class="card_step_tittle">Рассрочка</div>
+								<div class="card_step_desc"><?= get_sub_field('rassrochka') ?></div>
+						</div>
+						<?php endif; ?>
 			
 					</div>
 					<?php endwhile; ?>
-								
+					
+					<?php if (get_field('item')) : ?>
 					<div class="detail">
-					<?php if (have_rows("osobennosti")) : ?>
-    					<?php while (have_rows("osobennosti")) : the_row(); ?>
-						
 						<div class="detail_item">
-						<?php if (get_sub_field('tittle_item')) : ?>
-							<div class="detail_tittle"><?php the_sub_field("tittle_item") ?></div>
-						<?php endif; ?>
-						<?php if (get_sub_field('desc_item')) : ?>
-							<div class="detail_desc"><?php the_sub_field("desc_item") ?></div>
-						<?php endif; ?>
+							<?php the_field("item") ?>
 						</div>
-						
-						<?php endwhile; ?>
+					</div>
 					<?php endif; ?>
 
-					</div>
 					<div class="card_actions">
+
+						<?php if (get_field('item')) : ?>
 						<div class="more_btn">
 							<input type="checkbox" name="more_btn__card-<?php echo $post_ID ?>" id="more_btn__card-<?php echo $post_ID ?>">
 							<label for="more_btn__card-<?php echo $post_ID ?>">показать больше</label>
 						</div>
+						<?php endif; ?>
+						
 						<?php while (have_rows('knopka')) : the_row(); ?>
 						<div class="btn_wrap">
 							<div class="card_price">
-								<?php if (get_sub_field('czena')) : ?>
+								<?php if (mb_strtolower(get_sub_field('czena')) == 'бесплатно') : ?>
+									<span><?= get_sub_field('czena') ?></span>
+								<?php elseif (get_sub_field('czena')) : ?>
 									от <span><?= get_sub_field('czena') ?>₽</span>/урок
 								<?php endif; ?>
 							</div>
+							<?php endwhile; ?>
+							<?php
+								$url = ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+								$url = explode('?', $url)[0].'?action=partner&id='.$post_ID;
+								partner();
+							?>
 							<div class="card_btn">
-								<?php if (get_sub_field('partner_url')) : ?>
-									<a href="<?= get_sub_field('partner_url') ?>" target="_blank" class="btn">Подробнее</a>
-								<?php endif; ?>
+								<a href="<?php echo $url; ?>" target="_blank" class="btn">Подробнее</a>
 							</div>
 						</div>
-					<?php endwhile; ?>
 					</div>
-					
+
 					<?php while (have_rows('promo')) : the_row(); ?>
 					<?php if (get_sub_field('promo_tittle')) : ?>
 					<div class="card_promo">
