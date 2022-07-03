@@ -3,16 +3,27 @@
         font-size: 24px
         font-weight: 400
         margin: 20px 0
+        @media screen and ( max-width: 640px )
+            display: none
     [type="checkbox"]
         display: none
     .filter_wrap
         max-height: 130px
         overflow: hidden
-        padding-bottom: 20px
+        margin-bottom: 20px
+        @media screen and ( max-width: 640px )
+            max-height: 0
+            margin: 0
         &.show
             max-height: fit-content
+            margin: 20px 0
+            &+.show
+                display: block
         .filter_items
             display: inline-block
+            @media screen and ( max-width: 640px )
+                display: flex
+                flex-direction: column
             .filter_item
                 display: inherit
                 padding: 10px 10px 10px 0
@@ -35,3 +46,42 @@
                 cursor: pointer
     .more_btn
         padding-bottom: 35px
+        display: none
+        &.show
+            display: block
+            @media screen and ( max-width: 640px )
+                display: none
+    .filter_mobile
+        border-bottom: 1px solid #EAF9FF
+        border-top: 1px solid #EAF9FF
+        padding: 20px
+        margin: 0 -10px
+        display: flex
+        font-size: 16px
+        align-items: center
+        @media screen and ( min-width: 641px)
+            display: none
+        &::before
+            content: url('../images/filter.svg')
+        &::after
+            content: ""
+            background: url(../images/arrow.svg)
+            background-size: contain
+            background-repeat: no-repeat
+            background-position: center
+            width: 25px
+            height: 25px
+            display: inline-block
+            margin-left: auto
+        .circle
+            background: #65A7FF
+            color: #fff
+            border-radius: 99%
+            height: 25px
+            width: 25px
+            font-weight: 700
+            font-size: 14px
+            align-items: center
+            justify-content: center
+            display: flex
+            margin-left: 15px

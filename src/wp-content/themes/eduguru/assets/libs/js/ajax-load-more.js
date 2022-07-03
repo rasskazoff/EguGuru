@@ -23,13 +23,12 @@ jQuery(function ($) {
                     button.find('.loadmore').text("показать больше");
                     button.prev('.cards.container').append(data);
                     current_page++;
+                    fixHeight();
                     if (current_page == button.attr("data-max-pages")) {
                         button.hide();
-                        console.log('more-if-2');
                     }
                 } else {
                     button.hide();
-                    console.log('more-else');
                 }
             }
         });

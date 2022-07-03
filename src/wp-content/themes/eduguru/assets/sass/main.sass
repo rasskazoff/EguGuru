@@ -7,21 +7,37 @@
     font-size: 14px
     font-weight: 400
     margin: 20px 0
-.adv
+.counter
     display: flex
+    flex-wrap: wrap
     padding: 10px 0
-.adv_item
-    display: inherit
-    margin-right: auto
-    .adv_item_num
-        color: #65A7FF
-        font-size: 48px
-        font-weight: 700
-    .adv_item_text
-        font-size: 14px
-        font-weight: 400
-        margin: auto
-        display: grid
-        padding: 10px
-        span
+    @media screen and ( max-width: 640px )
+        display: block
+    .counter_item
+        display: inherit
+        margin-right: auto
+        @media screen and ( max-width: 960px )
+            width: 50%
+        @media screen and ( max-width: 640px )
+            width: 100%
+            display: flex
+            flex-wrap: wrap
+        .counter_item_num
+            color: #65A7FF
+            font-size: 48px
             font-weight: 700
+            @media screen and ( max-width: 640px )
+                text-align: right
+        .counter_item_text
+            font-size: 14px
+            font-weight: 400
+            margin: auto
+            display: flex
+            flex-direction: column
+            padding: 10px
+            @media screen and ( max-width: 960px )
+                margin: 0
+            @media screen and ( max-width: 640px )
+                width: 50%
+            span
+                font-weight: 700

@@ -8,6 +8,7 @@
     width: 100%
     max-width: 1200px
     margin: auto
+    padding: 0 20px
 ul.menu
         padding: 20px 0
         margin: 0
@@ -31,9 +32,10 @@ ul.menu
         cursor: inherit
         &::before
             content: url(../images/arrow.svg)
-    :checked
-        &~label
-            &::before
+input[type="checkbox"]
+    &:checked
+        &~label, &~.more_btn label
+            &::before,&::after
                 bottom: 2px
                 transform: scaleY(-1)
 .btn
@@ -42,5 +44,7 @@ ul.menu
     padding: 15px 25px
     border-radius: 10px
     text-decoration: none
+    font-weight: 600
+    text-transform: uppercase
     &:visited
         color: #ffffff

@@ -1,4 +1,13 @@
 jQuery(function ($) {
+    filterVissible = function(){ 
+
+        if ($('.filter_items').height() > 130){
+            $('.filter .more_btn').addClass('show');
+        }else{
+            $('.filter .more_btn').removeClass('show');
+        }
+    }
+
     //Получаем параметр в url
     $.urlParam = function (name) {
         const results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.search);
@@ -54,5 +63,6 @@ jQuery(function ($) {
                 }
             }
         });
+        filterVissible()
     })
 })

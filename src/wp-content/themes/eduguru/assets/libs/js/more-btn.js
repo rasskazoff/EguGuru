@@ -1,29 +1,18 @@
-jQuery(function ($) {
+    show_btn = function each(el,show,hide){
+        
+        if (typeof el == 'string'){el = document.querySelector(el)}
 
-    if ($('.filter_items').height() <= $('.filter_wrap').height()){
-        $('.filter .more_btn').hide();
-    } else{
-        $('.filter .more_btn').show();
-    }
-    
-    i=0;
-    $('.more_btn').on('change', moreToggle);
-        function moreToggle(e) {
-            
-            let label = $(this).find('label');
-
-            eval('show'+i+' = "'+label.text()+'"');
-            i=+1;
-            let hide =  'скрыть';
-
-            if ($(label).attr('for') == 'filter_more'){
-                wrap = $(this).closest('.filter').find('.filter_wrap');
-            }else{
-                wrap = $(this).closest('.card').find('.detail');
-            }
-            
-            $(wrap).toggleClass('show');
-            $(wrap).hasClass('show')?$(label).text(hide) : $(label).text(show0);
-            
+        if (el.getAttribute('for') == 'filter_more'){
+        wrap = el.closest('.filter').querySelector('.filter_wrap');
+        }else{
+        wrap = el.closest('.card').querySelector('.detail');
         }
-    });
+        //console.log(wrap)
+        wrap.classList.toggle('show')
+
+        if( window.getComputedStyle(el,':before').transform == 'none' ){
+            el.textContent = hide
+        }else{
+            el.textContent = show
+        }
+    }

@@ -44,7 +44,7 @@ if ($category->count > 0) : ?>
 		$school = array_unique($school);									//Удаляем дубли
 		$school_count = count($school);
 
-		$promo_count = count($promo);
+		$promo_count = isset($promo)?count($promo):'0';
 		wp_reset_postdata();
 		
 		$parent_cat = get_ancestors( $current_cat_id, 'category' ); 		// получаем всех родителей категории
@@ -58,33 +58,35 @@ if ($category->count > 0) : ?>
 		$parent_cat = array_reverse(explode('для', $parent_cat ))[0];
 	?>
 
-	<div class="adv">
-		<div class="adv_item">
-			<div class="adv_item_num"><?php echo $count ?></div>
-			<div class="adv_item_text"><span><?php echo true_wordform($count, 'курс', 'курса', 'курсов') ?> {по английскому языку}</span> для <?php echo $parent_cat ?> найдено</div>
+	<div class="counter">
+		<div class="counter_item">
+			<div class="counter_item_num"><?php echo $count ?></div>
+			<div class="counter_item_text"><span><?php echo true_wordform($count, 'курс', 'курса', 'курсов') ?> {по английскому языку}</span> для <?php echo $parent_cat ?> найдено</div>
 		</div>
-		<div class="adv_item">
-			<div class="adv_item_num"><?php echo min($price); ?></div>
-			<div class="adv_item_text"><span>₽ минимальная цена</span> за урок</div>
+		<div class="counter_item">
+			<div class="counter_item_num"><?php echo min($price); ?></div>
+			<div class="counter_item_text"><span>₽ минимальная цена</span> за урок</div>
 		</div>
-		<div class="adv_item">
-			<div class="adv_item_num"><?php echo $school_count; ?></div>
-			<div class="adv_item_text"><span><?php echo true_wordform($school_count, 'школа</span> найдена', 'школы</span> найдено', 'школ</span> найдено') ?></div>
+		<div class="counter_item">
+			<div class="counter_item_num"><?php echo $school_count; ?></div>
+			<div class="counter_item_text"><span><?php echo true_wordform($school_count, 'школа</span> найдена', 'школы</span> найдено', 'школ</span> найдено') ?></div>
 		</div>
-		<div class="adv_item">
-			<div class="adv_item_num"><?php echo $promo_count; ?></div>
-			<div class="adv_item_text"><span><?php echo true_wordform($promo_count, 'купон на скидку</span> найден', 'купона на скидки</span> найдено', 'купонов на скидки</span> найдено') ?></div>
+		<div class="counter_item">
+			<div class="counter_item_num"><?php echo $promo_count; ?></div>
+			<div class="counter_item_text"><span><?php echo true_wordform($promo_count, 'купон на скидку</span> найден', 'купона на скидки</span> найдено', 'купонов на скидки</span> найдено') ?></div>
 		</div>
 	</div>
 </div>
 
 <div class="filter container">
 	<h2 class="filter_tittle">Выберите нужные параметры:</h2>
+	<?php $tags = get_tags(); ?>
+	<input type="checkbox" name="filter_more" id="filter_more">
+	<label class="filter_mobile" for="filter_more" onclick="show_btn('.more_btn label','показать больше параметров','скрыть')">Параметры<span class="circle"><?php echo count($tags); ?></span></label>
 
 	<div class="filter_wrap">
 		<div class="filter_items">
 			<?php
-			$tags = get_tags();
 			$html = '';
 			foreach ( $tags as $tag ) {
 				$tag_link = get_tag_link( $tag->term_id );
@@ -92,14 +94,14 @@ if ($category->count > 0) : ?>
 				$html .= '<div class="filter_item">';
 				$html .= "<input type='checkbox' name={$tag->slug} id={$tag->slug}>";
 				$html .= "<label for={$tag->slug}>{$tag->name}</label></div>";
+
 			}
 			echo $html;
 			?>
 		</div>
 	</div>
 	<div class="more_btn">
-		<input type="checkbox" name="filter_more" id="filter_more">
-		<label for="filter_more">показать больше параметров</label>
+		<label for="filter_more" onclick="show_btn(this,'показать больше параметров','скрыть')">показать больше параметров</label>
 	</div>
 </div>
 
@@ -134,6 +136,7 @@ if ($category->count > 0) : ?>
 		<div
 			class="btn--load card_show_btn container"
 			data-max-pages="<?= $posts->max_num_pages; ?>"
+			onclick="fixHeight()"
 		>
 			<div class="more_btn">
 				<div class="loadmore">

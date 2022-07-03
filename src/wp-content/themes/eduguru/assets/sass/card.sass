@@ -2,9 +2,14 @@
     background: #EFF1F4
     color: #3a3a3a
     padding-bottom: 70px
+    @media screen and ( max-width: 640px )
+        padding-bottom: 30px
     .quantity_results
         font-size: 24px
         padding: 45px 0
+        @media screen and ( max-width: 640px )
+            font-size: 16px
+            padding: 20px 0
     .card_wrap
         display: block
         background: #FFFFFF
@@ -13,26 +18,71 @@
         overflow: hidden
         padding-top: 35px
         margin-bottom: 25px
+        @media screen and ( max-width: 960px )
+            position: relative
+            margin-left: -10px
+            margin-right: -10px
         &.top
             box-shadow: 0px 2px 4px rgba(101, 167, 255, 0.25), 0px 15px 37px 13px rgba(101, 167, 255, 0.2)
         .card
             display: flex
+            @media screen and ( max-width: 640px )
+                flex-direction: column
             .card_logo
                 max-width: 220px
                 min-width: 220px
                 margin-top: -100px
-                padding-top: 100px
+                padding-top: 200px
                 background: #EAF9FF
                 text-align: center
+                @media screen and ( max-width: 640px )
+                    max-width: 100%
+                    width: 100%
+                    margin: 0
+                    padding: 0
+                    height: 100px
+                    position: absolute
+                    top: 0
                 a
                     text-decoration: none
                     color: inherit
+                    height: 100%
+                    display: flex
+                    flex-direction: column
+                    margin: auto
+                    @media screen and ( max-width: 640px )
+                        position: absolute
+                        left: 50px
+                        width: 130px
+                        justify-content: center
+                        @media screen and ( max-width: 480px )
+                            left: 20px
                 &:visited
                     color: inherit
-                img
-                    padding: 110px 50px 0
+                .img
+                    width: 130px
+                    min-height: 50px
+                    background-repeat: no-repeat
+                    background-size: contain
+                    background-position: center top
+                    margin: 0 auto
+                    display: flex
+                    flex-direction: column-reverse
+                    @media screen and ( max-width: 640px )
+                        padding: 0
+                        background-position: center
+                    &+p
+                        margin-top: 5px
+                        @media screen and ( max-width: 640px )
+                            text-align: right
+                            margin-top: 0
+
+                        
             .card_tittle
                 margin: 30px 0
+                font-size: 20px
+                @media screen and ( max-width: 640px )
+                    font-size: 16px
     .card_top_label
             padding: 10px 20px
             background: #FEFFCE
@@ -42,19 +92,48 @@
             margin: auto
             display: flex
             align-items: center
+            @media screen and ( max-width: 640px )
+                position: absolute
+                z-index: 2
+                right: 20px
+                top: 10px
+                display: flex
+                flex-direction: column
+                text-align: center
+                justify-content: center
+                width: min-content
+                height: 80px
+                font-size: 12px
+                padding: 0 20px
             &::before
                 display: flex
                 content: url(../images/card_top_label.svg)
+                @media screen and ( max-width: 640px )
+                    padding: 0
+                    padding-bottom: 5px
+                    
     .card_content
         padding: 0 50px
         width: 100%
+        @media screen and ( max-width: 640px )
+            margin-top: 70px
+            @media screen and ( max-width: 480px )
+                padding: 0 20px
         .card_steps
             display: flex
             flex-wrap: wrap          
             .card_step
                 margin-bottom: 30px
-                width: calc( 25% - 40px )
+                width: calc( 100%/4 - 40px )
                 margin-right: 40px
+                @media screen and ( max-width: 1100px )
+                    width: calc( 100%/3 - 40px )
+                    @media screen and ( max-width: 960px )
+                        display: flex
+                        flex-wrap: wrap
+                        width: 100%
+                        margin-bottom: 0
+                        margin-right: 0
                 >div
                     padding: 7px 0
                     font-size: 14px
@@ -65,8 +144,21 @@
                     width: 100%
                     display: flex
                     align-self: center
+                    @media screen and ( max-width: 960px )
+                        color: #3a3a3a
+                        border-bottom: none
+                        width: fit-content
+                        font-weight: 400
+                        &::after
+                            content: ':'
+                            margin-right: 5px
+                        @media screen and ( max-width: 480px )
+                            &::before
+                                transform: scale(0.9)
                 .card_step_desc
                     display: grid
+                    @media screen and ( max-width: 960px )
+                        font-weight: 700
             .step .card_step_tittle::before
                 content: url(../images/card_step.svg)
             .person .card_step_tittle::before
@@ -79,25 +171,58 @@
             display: flex
             margin-top: auto
             margin-bottom: 35px
-            padding-top: 10px       
+            padding-top: 10px
+            flex-wrap: wrap
+            @media screen and ( max-width: 960px )
+                .more_btn
+                    width: 100%
+                    padding: 15px 0
+                    @media screen and ( max-width: 640px )
+                        label
+                            justify-content: center
             .btn_wrap
                 display: inherit
                 margin-left: auto
+                @media screen and ( max-width: 960px )
+                    display: flex
+                    flex-direction: row-reverse
+                    margin: 0
+                    margin-top: 30px
+                    width: 100%
+                .btn
+                    @media screen and ( max-width: 350px )
+                        padding:  12px 20px
             >div
                 margin-top: auto
                 .card_price
                     font-size: 14px
                     padding: 0 30px
+                    @media screen and ( max-width: 960px )
+                        margin-left: auto
+                        padding: 0
                     span
                         font-size: 24px
+                        @media screen and ( max-width: 350px )
+                            font-size: 20px
     .card_promo
         border-top: 1px dashed #65A7FF
         display: flex
         justify-content: center
+        @media screen and ( max-width: 640px )
+            margin: 0 -50px
+            padding: 10px 20px 30px
+            @media screen and ( max-width: 480px )
+                padding: 10px 40px 30px
+                @media screen and ( max-width: 480px )
+                    padding: 10px 50px 30px
         .col
             width: auto
             margin: auto 0
             padding: 10px
+            @media screen and ( max-width: 960px )
+                margin: 0
+                @media screen and ( max-width: 480px )
+                    padding: 0
             .promo_discount
                 background: #EAF9FF
                 color: #FE8B8B
@@ -109,11 +234,19 @@
                 display: flex
                 align-items: center
                 justify-content: center
+                @media screen and ( max-width: 960px )
+                    font-size: 16px
+                    width: 50px
+                    height: 50px
+                    @media screen and ( max-width: 380px )
+                        display: none
             .promo_tittle
                 font-size: 18px
                 color: #65A7FF
                 display: flex
                 align-self: center
+                @media screen and ( max-width: 960px )
+                    font-size: 16px
                 &::before
                     content: url(../images/box.svg)
             .promo_note
@@ -134,3 +267,5 @@
         background: #ffffff
         border-radius: 0px 0px 10px 10px
         padding: 5px
+        @media screen and ( max-width: 640px )
+            padding: 15px

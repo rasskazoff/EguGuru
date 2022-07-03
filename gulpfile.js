@@ -56,6 +56,7 @@ gulp.task('scripts', function() {
 		'src/wp-content/themes/eduguru/assets/libs/js/filter.js',
 		'src/wp-content/themes/eduguru/assets/libs/js/ajax-load-more.js',
 		'src/wp-content/themes/eduguru/assets/libs/js/more-btn.js',
+		'src/wp-content/themes/eduguru/assets/libs/js/fixwidth.js',
 		//'src/wp-content/themes/twentyseventeen/assets/js/common.js', // Always at the end
 		])
 	.pipe(concat('scripts.min.js'))

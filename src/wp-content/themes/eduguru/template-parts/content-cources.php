@@ -17,7 +17,8 @@
 					<?php endif; ?>
 
 						<?php if (get_sub_field('logotip')) : ?>
-							<img src="<?= get_sub_field('logotip') ?>" alt="<?php the_title(); ?>">
+							<div class="img" style="background-image: url(<?= get_sub_field('logotip') ?>)">
+						</div>
 						<?php endif; ?>
 					
 					<?php if (get_sub_field('school_url')) : ?>
@@ -99,7 +100,7 @@
 						<?php if (get_field('item')) : ?>
 						<div class="more_btn">
 							<input type="checkbox" name="more_btn__card-<?php echo $post_ID ?>" id="more_btn__card-<?php echo $post_ID ?>">
-							<label for="more_btn__card-<?php echo $post_ID ?>">показать больше</label>
+							<label for="more_btn__card-<?php echo $post_ID ?>" onclick="show_btn(this,'показать больше','скрыть')">показать больше</label>
 						</div>
 						<?php endif; ?>
 						
