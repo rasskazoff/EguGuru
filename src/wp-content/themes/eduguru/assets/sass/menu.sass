@@ -1,0 +1,68 @@
+.main-menu, .top-menu nav, .top-menu .search
+    @media screen and ( max-width: 960px  )
+        display: none        
+.menu
+    display: flex
+    &>li
+        margin-right: auto
+    .sub-menu
+        li
+            font-size: 16px
+            color: #626262
+            @media screen and ( min-width: 961px )
+                &:hover
+                    color: #65A7FF
+                    font-weight: 600
+        &>.menu-item-has-children
+            &:hover
+                &::after
+                    content: url(../images/arrow.svg)
+                    margin-left: 5px
+                    transform: rotate(270deg)
+                    display: inline-block
+        a
+            font-size: inherit
+            color: inherit
+    .menu-item-has-children
+        position: relative
+        &:hover
+            &>.sub-menu
+                display: flex
+    .sub-menu
+        display: none
+        //display: flex
+        position: absolute
+    &>li>.sub-menu
+        flex-direction: column
+        padding-top: 25px
+        padding-left: 0
+        margin: auto
+        left: 0
+        top: 25px
+        a
+            padding: 0 15px
+        .menu-item 
+            width: auto
+            padding: 7px 0
+            background: #ffffff
+        >.menu-item
+            box-shadow: 0 4px 10px rgb(203 217 222 / 25%)
+            &:last-of-type
+                padding-bottom: 27px
+                border-radius: 0px 0px 5px 5px
+            &:first-of-type
+                padding-top: 27px
+        li .sub-menu
+            padding: 20px
+            margin: auto
+            left: 100%
+            top: 0
+            max-width: 500px
+            width: max-content
+            flex-wrap: wrap
+            background: #ffffff
+            box-shadow: 0 4px 10px rgb(203 217 222 / 25%)
+            border-radius: 0px 0px 5px 5px
+            li
+                min-width: calc( 100% / 3 )
+                width: min-content

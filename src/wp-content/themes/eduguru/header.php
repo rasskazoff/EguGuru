@@ -29,7 +29,8 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'eduguru' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="top-menu container">
+		<input type="checkbox" name="burger" id="burger">
+		<div class="top-menu mob-menu container">
 			<div class="site-branding">
 				<?php
 				the_custom_logo();
@@ -55,8 +56,10 @@
 				);
 				?>
 			</nav>
+			<div class="search-mob"></div>
+			<label for="burger"></label>
 		</div>
-		
+
 		<div class="main-menu">
 			<nav class="container">
 				<?php
@@ -67,6 +70,16 @@
 					)
 				);
 				?>
+				<div class="mob-menu-bottom">
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'top-menu',
+							'menu_id'        => 'top-menu',
+						)
+					);
+					?>
+				</div>
 			</nav>
 		</div>
 	</header><!-- #masthead -->

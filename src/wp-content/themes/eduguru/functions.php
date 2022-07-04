@@ -253,3 +253,20 @@ function partner(){
 		}
 	}
 }
+
+//функция для wp all import при импортировании спец тегов
+function importTags($key, $val){
+	
+	$key = explode(' ',trim($key))[0];
+	
+	if($val == 'да'){
+		return $key;
+	}elseif($val == 'нет'){
+		return;
+	}else{
+		return $key.': '.$val;
+	}
+}
+
+//print_r(importTags('Формат - П','индивидуально+в группе'));
+//print_r(importTags('сертификат/диплом - П','да'));

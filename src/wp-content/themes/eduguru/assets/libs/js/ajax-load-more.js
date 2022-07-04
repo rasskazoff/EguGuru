@@ -5,7 +5,7 @@ jQuery(function ($) {
         button.find('.loadmore').text("Загрузка...");
 
         let left = $('.quantity_results').text().replace(/[^0-9]/g,"") - $('.card_wrap').length;
-        let posts = 2;
+        let posts = 10;
     
         if (left < posts){ posts = left };
 

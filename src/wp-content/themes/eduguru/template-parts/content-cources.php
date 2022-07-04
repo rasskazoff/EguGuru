@@ -90,6 +90,7 @@
 					<?php if (get_field('item')) : ?>
 					<div class="detail">
 						<div class="detail_item">
+							<b>Особенности:</b><br>
 							<?php the_field("item") ?>
 						</div>
 					</div>

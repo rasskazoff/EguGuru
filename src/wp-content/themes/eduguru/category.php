@@ -113,7 +113,7 @@ if ($category->count > 0) : ?>
 		$posts = new WP_Query(array(
 		"post_type"        => "cources",                  		# post, page, custom_post_type
 		"post_status"      => "publish",                       # статус записи
-		"posts_per_page"   => 2,                              # кол-во постов вывода/загрузки
+		"posts_per_page"   => 10,                              # кол-во постов вывода/загрузки
 		"tag" => isset($_GET['tags']) ? $_GET['tags'] : '',
         "cat" => $current_cat_id
 		));
@@ -132,7 +132,7 @@ if ($category->count > 0) : ?>
 		<?php wp_reset_postdata(); ?>
 		
 		</div>
-		<?php if ($category->count > 0) : ?>
+		<?php if ($category->count > 10) : ?>
 		<div
 			class="btn--load card_show_btn container"
 			data-max-pages="<?= $posts->max_num_pages; ?>"
