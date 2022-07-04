@@ -270,3 +270,12 @@ function importTags($key, $val){
 
 //print_r(importTags('Формат - П','индивидуально+в группе'));
 //print_r(importTags('сертификат/диплом - П','да'));
+/*
+{undefined5};
+[importTags("сертификат/диплом",{undefined6})];
+[importTags("трудоустройство",{undefined7})];
+[importTags("уровень",{undefined8})];
+[importTags("срок обучения",{undefined9})];
+[importTags("дата старта",{undefined10})];
+[importTags("рассрочка",{undefined11})];
+*/

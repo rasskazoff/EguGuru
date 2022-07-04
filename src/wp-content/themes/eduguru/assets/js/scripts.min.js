@@ -40,7 +40,7 @@ jQuery(function ($) {
 
         $.urlParam('tags')?tags = $.urlParam('tags'): tags = '';
 //ajax
-        const posts = 2;
+        const posts = 10;
 
         const button = $(".btn--load");
         const data = {
