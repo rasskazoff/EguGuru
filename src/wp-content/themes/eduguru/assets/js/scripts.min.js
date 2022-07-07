@@ -36,7 +36,12 @@ jQuery(function ($) {
             }
             tags = 'tags='+tags.slice(0,-1);
         }
-        history.pushState(null, null, '?'+tags);
+
+        if(tags == ''){
+            history.pushState(null, null, location.pathname);
+        }else{
+            history.pushState(null, null, '?'+tags);
+        }
 
         $.urlParam('tags')?tags = $.urlParam('tags'): tags = '';
 //ajax

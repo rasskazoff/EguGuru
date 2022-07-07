@@ -263,19 +263,25 @@ function importTags($key, $val){
 		return $key;
 	}elseif($val == 'нет'){
 		return;
+	}elseif($val == 'начинающий'){
+		return 'для начинающих';
+	}elseif($val == 'средний'){
+		return 'для среднего уровня';
+	}elseif($val == 'продвинутый'){
+		return 'для продвинутых';
 	}else{
 		return $key.': '.$val;
 	}
 }
 
-//print_r(importTags('Формат - П','индивидуально+в группе'));
+//print_r(importTags("уровень","средний"));
 //print_r(importTags('сертификат/диплом - П','да'));
 /*
 {undefined5};
-[importTags("сертификат/диплом",{undefined6})];
-[importTags("трудоустройство",{undefined7})];
+[importTags("с сертификатом/дипломом",{undefined6})];
+[importTags("с трудоустройством",{undefined7})];
 [importTags("уровень",{undefined8})];
 [importTags("срок обучения",{undefined9})];
 [importTags("дата старта",{undefined10})];
-[importTags("рассрочка",{undefined11})];
+[importTags("с рассрочкой",{undefined11})];
 */

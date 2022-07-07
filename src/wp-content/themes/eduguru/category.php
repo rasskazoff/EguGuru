@@ -65,7 +65,7 @@ if ($category->count > 0) : ?>
 		</div>
 		<div class="counter_item">
 			<div class="counter_item_num"><?php echo min($price); ?></div>
-			<div class="counter_item_text"><span>₽ минимальная цена</span> за урок</div>
+			<div class="counter_item_text"><span>₽ минимальная цена</span> за курс</div>
 		</div>
 		<div class="counter_item">
 			<div class="counter_item_num"><?php echo $school_count; ?></div>

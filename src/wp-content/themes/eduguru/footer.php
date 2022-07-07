@@ -14,7 +14,16 @@
 		<div class="footer container">
 			<div class="footer_menu">
 				<div class="footer_logo">
-					<img src="<?php echo get_bloginfo('template_url');?>/assets/images/logo.svg" alt="logo">
+					<?php
+					the_custom_logo();
+					if ( is_front_page() && is_home() ) :
+						?>
+						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+						<?php
+					else :
+						?>
+						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+					<?php endif; ?>
 				</div>
 				<nav>
 					<?php

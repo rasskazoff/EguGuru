@@ -11,8 +11,8 @@
 
 				<?php while (have_rows('logo_wrap')) : the_row(); ?>
 				<div class="card_logo">
-
-					<?php if (get_sub_field('school_url')) : ?>
+						
+					<?php /* if (get_sub_field('school_url')) : ?>
 					<a href="<?= get_sub_field('school_url') ?>" target="_blank">
 					<?php endif; ?>
 
@@ -24,6 +24,15 @@
 					<?php if (get_sub_field('school_url')) : ?>
 						<p><?= parse_url(get_sub_field('school_url'),PHP_URL_HOST)?></p>
 					</a>
+					<?php endif; */?> 
+
+					<?php if (get_sub_field('logotip')) : ?>
+						<div class="img" style="background-image: url(<?= get_sub_field('logotip') ?>)">
+					</div>
+					<?php endif; ?>
+					
+					<?php if (get_sub_field('school_url')) : ?>
+						<p><?= parse_url(get_sub_field('school_url'),PHP_URL_HOST)?></p>
 					<?php endif; ?>
 
 				</div>
@@ -91,7 +100,14 @@
 					<div class="detail">
 						<div class="detail_item">
 							<b>Особенности:</b><br>
-							<?php the_field("item") ?>
+							<?php
+							$item = get_field("item");
+							$item = explode("\r\n",$item);
+							//echo $item[0];
+							for($i=0; $i<count($item); $i++){
+								echo "<li>".$item[$i]."</li>";
+							}
+							?>
 						</div>
 					</div>
 					<?php endif; ?>
