@@ -18,16 +18,17 @@ if ($category->count > 0) : ?>
 			"post_status"      => "publish",
 			'orderby' => 'id',
 			'cat' => $current_cat_id,
-			'order' => 'DESC'
 		);
-		
+
 		$posts = get_posts( $args );
 		$count = count($posts);
 
 		foreach ( $posts as $post ) {
 			setup_postdata( $post );
+			print_r($post->meta_query);
 			$title = get_the_title( $post->ID );
-			$id = $post->ID;  																								//получаем id постов в категории
+			$id = $post->ID;
+			//получаем id постов в категории
 			$price[] = isset(get_fields($id)['knopka']['czena'])?get_fields($id)['knopka']['czena']:'';						//получаем значение поля цена по id поста
 			$school[] = isset(get_fields($id)['school'])?get_fields($id)['school']:'';    									//получаем названия школ из tittle url logo
 
@@ -115,7 +116,12 @@ if ($category->count > 0) : ?>
 		"post_status"      => "publish",                       # статус записи
 		"posts_per_page"   => 10,                              # кол-во постов вывода/загрузки
 		"tag" => isset($_GET['tags']) ? $_GET['tags'] : '',
-        "cat" => $current_cat_id
+        "cat" => $current_cat_id,
+		
+		'meta_key' => 'top',
+		'orderby'  => 'meta_value_num',
+		'order' => 'DESC'
+
 		));
 
         $count = $posts->found_posts;
