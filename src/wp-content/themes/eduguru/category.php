@@ -25,7 +25,6 @@ if ($category->count > 0) : ?>
 
 		foreach ( $posts as $post ) {
 			setup_postdata( $post );
-			print_r($post->meta_query);
 			$title = get_the_title( $post->ID );
 			$id = $post->ID;
 			//получаем id постов в категории
