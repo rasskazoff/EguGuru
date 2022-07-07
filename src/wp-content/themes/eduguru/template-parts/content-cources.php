@@ -102,7 +102,7 @@
 							<b>Особенности:</b><br>
 							<?php
 							$item = get_field("item");
-							$item = explode("\r\n",$item);
+							$item = explode("\n",$item);
 							//echo $item[0];
 							for($i=0; $i<count($item); $i++){
 								echo "<li>".$item[$i]."</li>";
