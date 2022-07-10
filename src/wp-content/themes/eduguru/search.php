@@ -8,7 +8,7 @@
  */
 
 get_header();
-$cats = get_terms( 'category', 'surname='.$_GET['s'] );
+$cats = get_terms( 'category', 'surname='.trim($_GET['s']) );
 if (count($cats) == 1) {
 	echo '<script>window.location.href="'.get_category_link($cats[0]->term_id).'"</script>';
 };
