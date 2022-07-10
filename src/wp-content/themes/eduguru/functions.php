@@ -353,7 +353,7 @@ function cptui_register_my_cpts_cources() {
 
 add_action( 'init', 'cptui_register_my_cpts_cources' );
 
-
+//Поиск по категориям
 function wpse_178511_get_terms_fields( $clauses, $taxonomies, $args ) {
     if ( ! empty( $args['surname'] ) ) {
         global $wpdb;
@@ -370,3 +370,15 @@ function wpse_178511_get_terms_fields( $clauses, $taxonomies, $args ) {
 }
 
 add_filter( 'terms_clauses', 'wpse_178511_get_terms_fields', 10, 3 );
+
+//Обертка пунктов меню в div для применения заглавной буквы элементом :first-letter
+add_filter( 'wp_nav_menu_objects', 'filter_wp_nav_menu_objects', 10, 2 );
+function filter_wp_nav_menu_objects( $items, $args ) {
+    foreach ( $items as $key => $item ) {
+        $title = $items[ $key ]->title;
+		$title = ucfirst($title);
+        $items[ $key ]->title = '<div>' .$title.'</div>';
+    }
+
+    return $items;
+}

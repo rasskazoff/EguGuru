@@ -25,7 +25,7 @@
 						<p><?= parse_url(get_sub_field('school_url'),PHP_URL_HOST)?></p>
 					</a>
 					<?php endif; */?> 
-
+				<div>
 					<?php if (get_sub_field('logotip')) : ?>
 						<div class="img" style="background-image: url(<?= get_sub_field('logotip') ?>)">
 					</div>
@@ -34,7 +34,7 @@
 					<?php if (get_sub_field('school_url')) : ?>
 						<p><?= parse_url(get_sub_field('school_url'),PHP_URL_HOST)?></p>
 					<?php endif; ?>
-
+				</div>
 				</div>
 				<?php endwhile; ?>
 
