@@ -1,4 +1,4 @@
-$=jQuery(function ($) {
+$=jQuery
     //Отображение кнопки параметров
     filterVissible = function(){ 
 
@@ -37,6 +37,8 @@ $=jQuery(function ($) {
         }
     }
     getTags()
+
+document.addEventListener('DOMContentLoaded', ()=>{
       //more-load-btn
     button = document.querySelector('.btn--load')
     posts = Number(button.dataset.posts)
@@ -112,6 +114,7 @@ $=jQuery(function ($) {
         filterVissible()
     })   
 })
+
 setPostAjax = (count, max_num_pages)=>{
     jQuery(function ($) {
         $(".quantity_results").text(count)
