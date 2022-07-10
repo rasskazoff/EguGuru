@@ -37,7 +37,7 @@ function eduguru_setup() {
 		* hard-coded <title> tag in the document head, and expect WordPress to
 		* provide it for us.
 		*/
-	add_theme_support( 'title-tag' );
+	//add_theme_support( 'title-tag' );
 
 	/*
 		* Enable support for Post Thumbnails on posts and pages.
@@ -204,17 +204,26 @@ add_action("wp_ajax_load_more", "load_posts");
 add_action("wp_ajax_nopriv_load_more", "load_posts");
 function load_posts()
 {	
-	
+
 	$posts = new WP_Query(array(
 		"post_type"        => "cources",
 		"post_status"      => "publish",
 		"posts_per_page"   => $_POST['posts'],
 		"paged" => $_POST["page"],
 		"tag" => $_POST["tags"],
-        "cat" => $current_cat_id
+        "cat" => $_POST["cat_id"],
+
+		'meta_key' => 'top',
+		'orderby'  => 'meta_value',
+		'order' => 'DESC'        
+		
 		));
+
 	$count = $posts->found_posts;
 	$count = true_wordform($count, 'Найден', 'Найдено', 'Найдено') . ' ' . $count . ' ' . true_wordform($count, 'вариант', 'варианта', 'вариантов');
+	if( !empty($_POST['filter'])){		
+		$html.= '<div id="ajax-add-script"> <script> setPostAjax("'.$count.'",'.$posts->max_num_pages.') </script> </div>';
+	}
 
     if ($posts->have_posts()) : while ($posts->have_posts()) : $posts->the_post();
 
@@ -224,25 +233,9 @@ function load_posts()
     endif;
 
     wp_reset_postdata();
-
-	if( !empty($_POST['filter'])){
-		$html.= '<script>
-				jQuery(function ($) {
-					$(".quantity_results").text("'.$count.'")
-					const button = $(".btn--load");
-					if ('.$posts->max_num_pages.' <= 1) {
-						button.hide();
-						console.log("FUNCTION HIDE");
-					}else{
-						button.show();
-					}
-				})
-				</script>';
-	}
-
     die($html);
 }
-
+// функция для переадресации на партнерский урл
 function partner(){
 	
 	if (isset($_GET['action'])){
@@ -285,3 +278,95 @@ function importTags($key, $val){
 [importTags("дата старта",{undefined10})];
 [importTags("с рассрочкой",{undefined11})];
 */
+
+function cptui_register_my_cpts_cources() {
+
+	/**
+	 * Post Type: Курсы.
+	 */
+
+	$labels = [
+		"name" => __( "Курсы", "eduguru" ),
+		"singular_name" => __( "cource", "eduguru" ),
+		"menu_name" => __( "Курсы", "eduguru" ),
+		"all_items" => __( "Все", "eduguru" ),
+		"add_new" => __( "Добавить", "eduguru" ),
+		"add_new_item" => __( "Добавить курс", "eduguru" ),
+		"edit_item" => __( "Редактировать курс", "eduguru" ),
+		"new_item" => __( "Новый курс", "eduguru" ),
+		"view_item" => __( "Посмотреть курс", "eduguru" ),
+		"view_items" => __( "Посмотреть курсы", "eduguru" ),
+		"search_items" => __( "Поиск курсов", "eduguru" ),
+		"not_found" => __( "Курсы не найдены", "eduguru" ),
+		"not_found_in_trash" => __( "В корзине нет курсов", "eduguru" ),
+		"parent" => __( "Родительский курс", "eduguru" ),
+		"featured_image" => __( "Популярные изображения курсов", "eduguru" ),
+		"set_featured_image" => __( "Установить избранное изображение для курса", "eduguru" ),
+		"remove_featured_image" => __( "Удалить избранное изображение для курса", "eduguru" ),
+		"use_featured_image" => __( "Использовать избранное изображение для курса", "eduguru" ),
+		"archives" => __( "Архив курсов", "eduguru" ),
+		"insert_into_item" => __( "Вставить в курс", "eduguru" ),
+		"uploaded_to_this_item" => __( "Загружено в этот курс", "eduguru" ),
+		"filter_items_list" => __( "Фильтровать список курсов", "eduguru" ),
+		"items_list_navigation" => __( "Навигация по списоку курсов", "eduguru" ),
+		"items_list" => __( "Список курсов", "eduguru" ),
+		"attributes" => __( "Атрибуты курса", "eduguru" ),
+		"name_admin_bar" => __( "Курс", "eduguru" ),
+		"item_published" => __( "Курс опубликован", "eduguru" ),
+		"item_published_privately" => __( "Курс опубликован в частном порядке", "eduguru" ),
+		"item_reverted_to_draft" => __( "Курс возвращен в черновик", "eduguru" ),
+		"item_scheduled" => __( "Курс запланирован", "eduguru" ),
+		"item_updated" => __( "Курс обновлен", "eduguru" ),
+		"parent_item_colon" => __( "Родительский курс", "eduguru" ),
+	];
+
+	$args = [
+		"label" => __( "Курсы", "eduguru" ),
+		"labels" => $labels,
+		"description" => "Курсы",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"rest_namespace" => "wp/v2",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"can_export" => false,
+		"rewrite" => [ "slug" => "cources", "with_front" => true ],
+		"query_var" => true,
+		"menu_icon" => "dashicons-welcome-learn-more",
+		"supports" => [ "title", "editor", "thumbnail" ],
+		"taxonomies" => [ "category", "post_tag" ],
+		"show_in_graphql" => false,
+	];
+
+	register_post_type( "cources", $args );
+}
+
+add_action( 'init', 'cptui_register_my_cpts_cources' );
+
+
+function wpse_178511_get_terms_fields( $clauses, $taxonomies, $args ) {
+    if ( ! empty( $args['surname'] ) ) {
+        global $wpdb;
+
+        $surname_like = $wpdb->esc_like( $args['surname'] );
+
+        if ( ! isset( $clauses['where'] ) )
+            $clauses['where'] = '1=1';
+
+        $clauses['where'] .= $wpdb->prepare( " AND t.name LIKE %s OR t.name LIKE %s", "$surname_like%", "% $surname_like%" );
+    }
+
+    return $clauses;
+}
+
+add_filter( 'terms_clauses', 'wpse_178511_get_terms_fields', 10, 3 );

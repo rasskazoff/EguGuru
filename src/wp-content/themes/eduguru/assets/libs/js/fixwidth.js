@@ -16,7 +16,7 @@ jQuery(function ($) {
 
             for(i=0; i<$(card).length; i++){
                 
-                let block = card+':eq('+i+')'+' .card_step_tittle';
+                let block = card+':eq('+i+')'+' .card_step_title';
                 height=[];
                 for(b=0; b<$(block).length; b++){
                     height.push($(block+':eq('+b+')').outerHeight());

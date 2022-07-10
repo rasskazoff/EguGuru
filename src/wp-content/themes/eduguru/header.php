@@ -20,6 +20,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<title><?php echo get_field('title'); ?></title>
 	<?php wp_head(); ?>
 </head>
 
@@ -43,7 +44,8 @@
 					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 				<?php endif; ?>
 			</div><!-- .site-branding -->
-			<div class="search">
+			<input type="checkbox" name="mob-search" id="mob-search">
+			<div id="search" class="search">
 				<?php get_search_form(); ?>
 			</div>
 			<nav>
@@ -56,7 +58,7 @@
 				);
 				?>
 			</nav>
-			<div class="search-mob"></div>
+			<label for="mob-search" class="search-mob"></label>
 			<label for="burger"></label>
 		</div>
 

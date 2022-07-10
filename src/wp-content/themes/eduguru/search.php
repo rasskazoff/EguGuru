@@ -8,46 +8,38 @@
  */
 
 get_header();
+$cats = get_terms( 'category', 'surname='.$_GET['s'] );
+if (count($cats) == 1) {
+	echo '<script>window.location.href="'.get_category_link($cats[0]->term_id).'"</script>';
+};
 ?>
 
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main main container">
 
-		<?php if ( have_posts() ) : ?>
-
+		<?php if ( $cats ): ?>
 			<header class="page-header">
-				<h1 class="page-title">
+				<h1 class="page-title title">
 					<?php
 					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'eduguru' ), '<span>' . get_search_query() . '</span>' );
+					printf( esc_html__( 'Результаты поиска по запросу: %s', 'eduguru' ), '<span>' . get_search_query() . '</span>' );
 					?>
 				</h1>
 			</header><!-- .page-header -->
-
+			<div class="search_result">
+				<ul>
 			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+			foreach ( $cats as $cat ):
+				
+				echo '<li><a href="'.get_category_link($cat->term_id).'">'.$cat->name.'<a></li>';
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
-
-			endwhile;
-
-			the_posts_navigation();
-
+			endforeach; ?>
+			</ul>
+			</div>
+			<?php the_posts_navigation();
 		else :
-
 			get_template_part( 'template-parts/content', 'none' );
-
 		endif;
 		?>
-
 	</main><!-- #main -->
-
 <?php
-get_sidebar();
 get_footer();

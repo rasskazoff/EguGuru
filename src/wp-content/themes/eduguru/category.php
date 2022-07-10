@@ -7,8 +7,17 @@ $current_cat_name = $category->name;
 if ($category->count > 0) : ?>
 
 <div class="main container">
-	<h1 class="tittle"><?php echo single_cat_title(); ?></h1>
-	<p class="description"><?php the_field('description'); ?></p>
+	<h1 class="title">
+		<?php
+			if (!empty(get_field('h1'))) {
+				echo get_field('h1');
+			}else{
+				echo single_cat_title();
+			}
+		?>
+	</h1>
+
+	<div class="description"><?php echo category_description(); ?></div>
 
 	<?php
 		//получаем список постов в категории
@@ -29,13 +38,13 @@ if ($category->count > 0) : ?>
 			$id = $post->ID;
 			//получаем id постов в категории
 			$price[] = isset(get_fields($id)['knopka']['czena'])?get_fields($id)['knopka']['czena']:'';						//получаем значение поля цена по id поста
-			$school[] = isset(get_fields($id)['school'])?get_fields($id)['school']:'';    									//получаем названия школ из tittle url logo
+			$school[] = isset(get_fields($id)['school'])?get_fields($id)['school']:'';    									//получаем названия школ из title url logo
 
 			$promo_discount = isset(get_fields($id)['promo']['promo_discount'])?get_fields($id)['promo']['promo_discount']:'';
-			$promo_tittle = isset(get_fields($id)['promo']['promo_tittle'])?get_fields($id)['promo']['promo_tittle']:'';
+			$promo_title = isset(get_fields($id)['promo']['promo_title'])?get_fields($id)['promo']['promo_title']:'';
 			$promo_note = isset(get_fields($id)['promo']['promo_note'])?get_fields($id)['promo']['promo_note']:'';
 
-			if (!empty($promo_discount) && !empty($promo_tittle) && !empty($promo_note)) {
+			if (!empty($promo_discount) && !empty($promo_title) && !empty($promo_note)) {
 				$promo[] = 'promo'.$id;
 			};
 		}
@@ -48,9 +57,12 @@ if ($category->count > 0) : ?>
 		wp_reset_postdata();
 		
 		$parent_cat = get_ancestors( $current_cat_id, 'category' ); 		// получаем всех родителей категории
+		$child_cat = '';
 		if (!empty($parent_cat)){
-			$parent_cat = array_reverse( $parent_cat ); 			// изменяем порядок в массиве на обратный(от старшего к младшему)
+			$parent_cat = array_reverse( $parent_cat );			// изменяем порядок в массиве на обратный(от старшего к младшему)
 			$parent_cat = get_cat_name( $parent_cat[0] ); 			// название старшей категории.
+			$child_cat = mb_strtolower(single_cat_title('',0));
+			$child_cat = ' {'.$child_cat.'} ';
 		}else{
 			$parent_cat = $current_cat_name;
 		}
@@ -61,7 +73,7 @@ if ($category->count > 0) : ?>
 	<div class="counter">
 		<div class="counter_item">
 			<div class="counter_item_num"><?php echo $count ?></div>
-			<div class="counter_item_text"><span><?php echo true_wordform($count, 'курс', 'курса', 'курсов') ?> {по английскому языку}</span> для <?php echo $parent_cat ?> найдено</div>
+			<div class="counter_item_text"><span><?php echo true_wordform($count, 'курс', 'курса', 'курсов') ?><?php echo $child_cat; ?></span> для <?php echo $parent_cat ?> найдено</div>
 		</div>
 		<div class="counter_item">
 			<div class="counter_item_num"><?php echo min($price); ?></div>
@@ -79,7 +91,7 @@ if ($category->count > 0) : ?>
 </div>
 
 <div class="filter container">
-	<h2 class="filter_tittle">Выберите нужные параметры:</h2>
+	<h2 class="filter_title">Выберите нужные параметры:</h2>
 	<?php $tags = get_tags(); ?>
 	<input type="checkbox" name="filter_more" id="filter_more">
 	<label class="filter_mobile" for="filter_more" onclick="show_btn('.more_btn label','показать больше параметров','скрыть')">Параметры<span class="circle"><?php echo count($tags); ?></span></label>
@@ -110,19 +122,20 @@ if ($category->count > 0) : ?>
 <div class="cards_wrap">
 	<div class="cards container">
 		<?php
+		$posts_per_page = 10;
 		$posts = new WP_Query(array(
-		"post_type"        => "cources",                  		# post, page, custom_post_type
-		"post_status"      => "publish",                       # статус записи
-		"posts_per_page"   => 10,                              # кол-во постов вывода/загрузки
+		"post_type"        => "cources",
+		"post_status"      => "publish",
+		"posts_per_page"   => $posts_per_page,
 		"tag" => isset($_GET['tags']) ? $_GET['tags'] : '',
         "cat" => $current_cat_id,
 		
 		'meta_key' => 'top',
-		'orderby'  => 'meta_value_num',
+		'orderby'  => 'meta_value',
 		'order' => 'DESC'
 
 		));
-
+		
         $count = $posts->found_posts;
         ?>
 
@@ -137,11 +150,12 @@ if ($category->count > 0) : ?>
 		<?php wp_reset_postdata(); ?>
 		
 		</div>
-		<?php if ($category->count > 10) : ?>
 		<div
 			class="btn--load card_show_btn container"
 			data-max-pages="<?= $posts->max_num_pages; ?>"
-			onclick="fixHeight()"
+			data-posts="<?= $posts_per_page ?>"
+			data-current-page="1"
+			data-category-id="<?= $current_cat_id ?>"
 		>
 			<div class="more_btn">
 				<div class="loadmore">
@@ -151,7 +165,7 @@ if ($category->count > 0) : ?>
 				</div>
 			</div>
 		</div>
-		<?php endif; // end if count?>
+		
 	</div>	
 </div>
 	

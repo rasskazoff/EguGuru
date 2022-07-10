@@ -39,56 +39,56 @@
 				<?php endwhile; ?>
 
 				<div class="card_content">
-					<h2 class="card_tittle"><?php the_title();?><?php if( get_field('school') ){ echo ' в '; the_field('school'); }?></h2>
+					<h2 class="card_title"><?php the_title();?><?php if( get_field('school') ){ echo ' в '; the_field('school'); }?></h2>
 
 					<?php while (have_rows('parametry')) : the_row(); ?>
 					<div class="card_steps">
 
 						<?php if (get_sub_field('format')) : ?>
 						<div class="card_step format">
-							<div class="card_step_tittle">Формат</div>
+							<div class="card_step_title">Формат</div>
 								<div class="card_step_desc"><?= get_sub_field('format') ?></div>
 						</div>
 						<?php endif; ?>
 
 						<?php if (get_sub_field('sertifikatdiplom')) : ?>
 						<div class="card_step step">
-							<div class="card_step_tittle">Сертификат/диплом</div>
+							<div class="card_step_title">Сертификат/диплом</div>
 								<div class="card_step_desc"><?= get_sub_field('sertifikatdiplom') ?></div>
 						</div>
 						<?php endif; ?>
 
 						<?php if (get_sub_field('trudoustrojstvo')) : ?>
 						<div class="card_step person">
-							<div class="card_step_tittle">Трудоустройство</div>
+							<div class="card_step_title">Трудоустройство</div>
 								<div class="card_step_desc"><?= get_sub_field('trudoustrojstvo') ?></div>
 						</div>
 						<?php endif; ?>
 
 						<?php if (get_sub_field('uroven')) : ?>
 						<div class="card_step level">
-							<div class="card_step_tittle">Уровень</div>
+							<div class="card_step_title">Уровень</div>
 								<div class="card_step_desc"><?= get_sub_field('uroven') ?></div>
 						</div>
 						<?php endif; ?>
 
 						<?php if (get_sub_field('srok_obucheniya')) : ?>
 						<div class="card_step step">
-							<div class="card_step_tittle">Срок обучения</div>
+							<div class="card_step_title">Срок обучения</div>
 								<div class="card_step_desc"><?= get_sub_field('srok_obucheniya') ?></div>
 						</div>
 						<?php endif; ?>
 
 						<?php if (get_sub_field('data_starta')) : ?>
 						<div class="card_step step">
-							<div class="card_step_tittle">Дата старта</div>
+							<div class="card_step_title">Дата старта</div>
 								<div class="card_step_desc"><?= get_sub_field('data_starta') ?></div>
 						</div>
 						<?php endif; ?>
 
 						<?php if (get_sub_field('rassrochka')) : ?>
 						<div class="card_step step">
-							<div class="card_step_tittle">Рассрочка</div>
+							<div class="card_step_title">Рассрочка</div>
 								<div class="card_step_desc"><?= get_sub_field('rassrochka') ?></div>
 						</div>
 						<?php endif; ?>
@@ -143,7 +143,7 @@
 					</div>
 
 					<?php while (have_rows('promo')) : the_row(); ?>
-					<?php if (get_sub_field('promo_tittle')) : ?>
+					<?php if (get_sub_field('promo_title')) : ?>
 					<div class="card_promo">
 						<?php if (get_sub_field('promo_discount')) : ?>
 						<div class="col">
@@ -151,7 +151,7 @@
 						</div>
 						<?php endif; ?>
 						<div class="col">
-							<h3 class="promo_tittle"><?= get_sub_field('promo_tittle') ?></h3>
+							<h3 class="promo_title"><?= get_sub_field('promo_title') ?></h3>
 							<?php if (get_sub_field('promo_note')) : ?>
 								<p class="promo_note"><?= get_sub_field('promo_note') ?></p>
 							<?php endif; ?>
