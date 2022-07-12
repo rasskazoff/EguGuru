@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="<?php echo get_bloginfo('template_url');?>/assets/css/style.min.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" >
+	<link as="style" rel="stylesheet preload prefetch" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" type="text/css" crossorigin="anonymous">
 	<title><?php echo get_field('title'); ?></title>
 	<?php wp_head(); ?>
 </head>

@@ -250,7 +250,7 @@ function partner(){
 //функция для wp all import при импортировании спец тегов
 function importTags($key, $val){
 	
-	$key = explode(' ',trim($key))[0];
+	//$key = explode(' ',trim($key))[0];
 	
 	if($val == 'да'){
 		return $key;
@@ -268,15 +268,15 @@ function importTags($key, $val){
 }
 
 //print_r(importTags("уровень","средний"));
-//print_r(importTags('сертификат/диплом - П','да'));
+//print_r(importTags("с сертификатом/дипломом","да"));
 /*
-{undefined5};
-[importTags("с сертификатом/дипломом",{undefined6})];
-[importTags("с трудоустройством",{undefined7})];
-[importTags("уровень",{undefined8})];
-[importTags("срок обучения",{undefined9})];
-[importTags("дата старта",{undefined10})];
-[importTags("с рассрочкой",{undefined11})];
+{undefined6};
+[importTags("с сертификатом/дипломом",{undefined7})];
+[importTags("с трудоустройством",{undefined8})];
+[importTags("уровень",{undefined9})];
+[importTags("срок обучения",{undefined10})];
+[importTags("дата старта",{undefined11})];
+[importTags("с рассрочкой",{undefined12})];
 */
 
 function cptui_register_my_cpts_cources() {

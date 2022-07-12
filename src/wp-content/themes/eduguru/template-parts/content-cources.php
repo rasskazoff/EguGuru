@@ -143,15 +143,15 @@
 					</div>
 
 					<?php while (have_rows('promo')) : the_row(); ?>
-					<?php if (get_sub_field('promo_title')) : ?>
+					<?php if (get_sub_field('promo_tittle')) : ?>
 					<div class="card_promo">
 						<?php if (get_sub_field('promo_discount')) : ?>
 						<div class="col">
-							<div class="promo_discount">-<?= get_sub_field('promo_discount') ?>%</div>
+							<div class="promo_discount">-<?= get_sub_field('promo_discount') ?></div>
 						</div>
 						<?php endif; ?>
 						<div class="col">
-							<h3 class="promo_title"><?= get_sub_field('promo_title') ?></h3>
+							<h3 class="promo_title"><?= get_sub_field('promo_tittle') ?></h3>
 							<?php if (get_sub_field('promo_note')) : ?>
 								<p class="promo_note"><?= get_sub_field('promo_note') ?></p>
 							<?php endif; ?>
