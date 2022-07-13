@@ -279,6 +279,36 @@ function importTags($key, $val){
 [importTags("с рассрочкой",{undefined12})];
 */
 
+
+//функция для wp all import при импортировании бесплатных курсов
+function importFree($val1, $val2, $val3, $for){
+	$val3 = mb_strtolower($val3);
+	if($for == 1){
+		$val1 = 'Курсы '.$val1;
+	};
+	if($for == 2){
+		$val2 = 'Курсы '.$val2;
+	};
+	if($val3 == 'бесплатно'){
+		return $val2;
+	}else{
+		return $val1;
+	};
+}
+//print_r( importFree('Курсы для взрослых','Бесплатные курсы', 'Бесплатно') );
+/*
+[importFree({undefined3},"Бесплатные курсы", {undefined13},1)]
+[importFree({undefined4},{undefined3}, {undefined13},2)]
+[importFree({undefined5},{undefined4}, {undefined13},0)]
+[importFree("",{undefined5}, {undefined13},0)]
+
+print_r(importFree("для взрослых","Бесплатные курсы", "Бесплатно", 1));
+print_r(importFree("{undefined4}","Курсы {undefined3}", "Бесплатно",""));
+print_r(importFree("{undefined5}","{undefined4}", "Бесплатно",""));
+print_r(importFree("","{undefined5}", "Бесплатно",""));
+*/
+
+
 function cptui_register_my_cpts_cources() {
 
 	/**
