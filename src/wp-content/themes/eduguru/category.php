@@ -76,7 +76,7 @@ if ($category->count > 0) : ?>
 			<div class="counter_item_text"><span><?php echo true_wordform($count, 'курс', 'курса', 'курсов') ?><?php echo $child_cat; ?></span> для <?php echo $parent_cat ?> найдено</div>
 		</div>
 		<div class="counter_item">
-			<div class="counter_item_num"><?php echo min($price); ?></div>
+			<div class="counter_item_num"><?php if (mb_strtolower(min($price)) == 'бесплатно'){ echo "0"; }else{echo min($price);}?></div>
 			<div class="counter_item_text"><span>₽ минимальная цена</span> за курс</div>
 		</div>
 		<div class="counter_item">
