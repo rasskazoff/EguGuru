@@ -41,7 +41,7 @@ if ($category->count > 0) : ?>
 			$school[] = isset(get_fields($id)['school'])?get_fields($id)['school']:'';    									//получаем названия школ из title url logo
 
 			$promo_discount = isset(get_fields($id)['promo']['promo_discount'])?get_fields($id)['promo']['promo_discount']:'';
-			$promo_title = isset(get_fields($id)['promo']['promo_title'])?get_fields($id)['promo']['promo_title']:'';
+			$promo_title = isset(get_fields($id)['promo']['promo_tittle'])?get_fields($id)['promo']['promo_tittle']:'';
 			$promo_note = isset(get_fields($id)['promo']['promo_note'])?get_fields($id)['promo']['promo_note']:'';
 
 			if (!empty($promo_discount) && !empty($promo_title) && !empty($promo_note)) {
