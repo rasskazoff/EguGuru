@@ -15,7 +15,7 @@ $(document).ready(()=>{
 		perView = 2
 		grid = 1
 	}
-    if($('.swiper-slide').length < perView){
+    if($('.swiper-slide').length <= perView){
         grid = 1
     }
 

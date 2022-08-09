@@ -70,6 +70,8 @@ Template Post Type: post, page, product
 						'post_type' => 'school',
 						'publish' => true,
 						'posts_per_page' => -1,
+						'orderby' => 'date',
+						'order' => 'ASC'
 					);
 					$posts = new WP_Query($args);
 				?>
