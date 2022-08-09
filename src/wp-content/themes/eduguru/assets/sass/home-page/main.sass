@@ -1,0 +1,77 @@
+h2
+    font-size: 36px
+    font-weight: 400
+    color: #3A3A3A
+    @media screen and ( max-width: 640px )
+        font-size: 24px
+        line-height: 31px
+.main
+    background: radial-gradient(54.2% 81.38% at 48.75% 65%, #7BD9FF 0%, #1B9BFF 100%)
+    color: #ffffff
+    text-align: center
+    text-align: -webkit-center
+    padding: 50px 0
+    .container
+        position: relative
+        margin: 30px 0
+        width: 100vw
+        overflow: hidden
+        &>*
+            position: relative
+            z-index: 2
+        h1
+            max-width: 815px
+            padding-bottom: 30px
+            font-size: 36px
+            @media screen and ( max-width: 640px )
+                font-size: 24px
+                line-height: 31px
+        .descript
+            padding: 20px 0
+            font-size: 20px
+            max-width: 600px
+            @media screen and ( max-width: 640px )
+                font-weight: 700
+                line-height: 19px
+                font-size: 16px
+        .search
+            padding: 15px 0
+            .searchform input[type=text]
+                width: 430px
+                padding-left: 20px
+                padding-right: 40px
+                line-height: 40px
+                &::placeholder
+                    color: #B6B6B6
+                @media screen and ( max-width: 480px )
+                    height: 45px
+                    width: 300px
+                    line-height: 45px
+                    &::placeholder
+                        font-size: 12px
+            .searchform [type=submit]
+                content: ''
+                background: #EAF9FF
+                border-radius: 100%
+                margin: 5px
+                padding: 5px
+                height: calc( 100% - 10px )
+
+        .books
+            content: url(../images/books.svg)
+            right: 100px
+            @media screen and ( max-width: 960px )
+                display: none
+        .coffe
+            content: url(../images/coffe.svg)
+            left: 0
+            @media screen and ( max-width: 960px )
+                opacity: 0.3
+                top: 50%
+                transform: translateY(-50%)
+                width: 270px
+                left: 20px
+        .books,.coffe
+            position: absolute
+            z-index: 1
+            bottom: 0

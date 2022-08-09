@@ -1,0 +1,47 @@
+.empty
+    &.container
+        .entry-content
+            max-width: 740px
+        p
+            margin-block-end: 1em
+            margin-block-start: 1em
+            font-size: 14px
+        h1,h2
+            font-weight: 400
+            margin-block-start: 1em
+        h1
+            font-size: 36px
+            @media screen and (max-width: 960px)
+                font-size: 24px
+        h2
+            font-size: 24px
+        .entry-content
+            margin: 3em 0
+            @media screen and (max-width: 960px)
+                margin: 2em 0
+        textarea
+            border: 1px solid rgba(203, 217, 222, 0.58)
+            border-radius: 5px
+        input:not([type="submit"])
+            border: none
+            border-bottom: 1px solid rgba(203, 217, 222, 0.58)
+            border-radius: 0
+            padding-left: 0
+            &::placeholder
+                color: #D9D9D9
+        textarea, input
+            margin: 7px 0
+        [type="submit"]
+            background: #65A7FF
+            color: #fff
+            border: none
+            text-transform: uppercase
+            border-radius: 10px
+            padding: 15px 25px
+            font-weight: 600
+        .map
+            margin-bottom: 3em
+            @media screen and (max-width: 640px)
+                margin: 0 -20px
+                [id*="ymaps"], .ymaps-2-1-79-map
+                    height: 240px!important

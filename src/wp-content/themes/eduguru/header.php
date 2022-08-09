@@ -17,6 +17,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link rel="stylesheet" href="<?php echo get_bloginfo('template_url');?>/assets/css/style.min.css">
+	<?php  if (is_page_template('template-parts/home.php')): ?>
+	<link rel="stylesheet" href="<?php echo get_bloginfo('template_url');?>/assets/css/style-home.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+	<script async="" src="<?php echo get_bloginfo('template_url');?>/assets/js/scripts-home.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+	<?php endif; ?>
+	<?php  if (is_page_template('template-parts/empty.php')): ?>
+	<link rel="stylesheet" href="<?php echo get_bloginfo('template_url');?>/assets/css/style-empty.min.css">
+	<?php endif; ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link as="style" rel="stylesheet preload prefetch" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" type="text/css" crossorigin="anonymous">

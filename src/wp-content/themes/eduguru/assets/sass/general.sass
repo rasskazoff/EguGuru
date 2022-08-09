@@ -1,7 +1,11 @@
+html, body
+    overflow-x: hidden
 #page
     display: grid
     min-height: 100vh
     grid-template-rows: auto 1fr auto
+.category #page
+    grid-template-rows: auto auto auto 1fr
 *
     font-family: 'Inter', sans-serif
     &::before

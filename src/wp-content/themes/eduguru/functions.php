@@ -52,7 +52,7 @@ function eduguru_setup() {
 			'main-menu' => esc_html__( 'Основное меню', 'eduguru' ),
 			'top-menu' => esc_html__( 'Верхнее меню', 'eduguru' ),
 			'footer-menu' => esc_html__( 'Меню в подвале', 'eduguru' ),
-			'bottom-menu' => esc_html__( 'Нижнее меню', 'eduguru' ),
+			'bottom-menu' => esc_html__( 'Нижнее меню', 'eduguru' )
 		)
 	);
 
@@ -183,6 +183,7 @@ function add_scripts(){
 
 	wp_enqueue_script('jquery');
 	wp_enqueue_script("eduguru-js", get_template_directory_uri() . "/assets/js/scripts.min.js");
+	
  }
  
  add_action( 'wp_enqueue_scripts', 'add_scripts'); 
@@ -383,6 +384,80 @@ function cptui_register_my_cpts_cources() {
 
 add_action( 'init', 'cptui_register_my_cpts_cources' );
 
+function cptui_register_my_cpts_school() {
+
+	/**
+	 * Post Type: Школы.
+	 */
+
+	$labels = [
+		"name" => __( "Школы", "eduguru" ),
+		"singular_name" => __( "school", "eduguru" ),
+		"menu_name" => __( "Школы", "eduguru" ),
+		"all_items" => __( "Все", "eduguru" ),
+		"add_new" => __( "Добавить", "eduguru" ),
+		"add_new_item" => __( "Добавить школу", "eduguru" ),
+		"edit_item" => __( "Редактировать школу", "eduguru" ),
+		"new_item" => __( "Новая школа", "eduguru" ),
+		"view_item" => __( "Посмотреть школу", "eduguru" ),
+		"view_items" => __( "Посмотреть школы", "eduguru" ),
+		"search_items" => __( "Поиск школ", "eduguru" ),
+		"not_found" => __( "Школы не найдены", "eduguru" ),
+		"not_found_in_trash" => __( "В корзине нет школ", "eduguru" ),
+		"parent" => __( "Родительский школу", "eduguru" ),
+		"featured_image" => __( "Популярные изображения школ", "eduguru" ),
+		"set_featured_image" => __( "Установить избранное изображение для школы", "eduguru" ),
+		"remove_featured_image" => __( "Удалить избранное изображение для школы", "eduguru" ),
+		"use_featured_image" => __( "Использовать избранное изображение для школы", "eduguru" ),
+		"archives" => __( "Архив школ", "eduguru" ),
+		"insert_into_item" => __( "Вставить в школу", "eduguru" ),
+		"uploaded_to_this_item" => __( "Загружено в эту школу", "eduguru" ),
+		"filter_items_list" => __( "Фильтровать список школ", "eduguru" ),
+		"items_list_navigation" => __( "Навигация по списоку школ", "eduguru" ),
+		"items_list" => __( "Список школ", "eduguru" ),
+		"attributes" => __( "Атрибуты школ", "eduguru" ),
+		"name_admin_bar" => __( "Школа", "eduguru" ),
+		"item_published" => __( "Школа опубликована", "eduguru" ),
+		"item_published_privately" => __( "Школа опубликована в частном порядке", "eduguru" ),
+		"item_reverted_to_draft" => __( "Школа возвращена в черновик", "eduguru" ),
+		"item_scheduled" => __( "Школа запланирована", "eduguru" ),
+		"item_updated" => __( "Школа обновлена", "eduguru" ),
+		"parent_item_colon" => __( "Родительская школа", "eduguru" ),
+	];
+
+	$args = [
+		"label" => __( "Школы", "eduguru" ),
+		"labels" => $labels,
+		"description" => "Школы",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"rest_namespace" => "wp/v2",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"can_export" => false,
+		"rewrite" => [ "slug" => "school", "with_front" => true ],
+		"query_var" => true,
+		"menu_icon" => "dashicons-book-alt",
+		"supports" => [ "title", "editor", "thumbnail" ],
+		"taxonomies" => [],
+		"show_in_graphql" => false,
+	];
+
+	register_post_type( "school", $args );
+}
+
+add_action( 'init', 'cptui_register_my_cpts_school' );
+
 //Поиск по категориям
 function wpse_178511_get_terms_fields( $clauses, $taxonomies, $args ) {
     if ( ! empty( $args['surname'] ) ) {
@@ -412,3 +487,36 @@ function filter_wp_nav_menu_objects( $items, $args ) {
 
     return $items;
 }
+
+//Allow SVG files in Media Library.
+function extra_mime_types( $mimes ) {
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+  }
+  add_filter( 'upload_mimes', 'extra_mime_types' );
+
+  function my_customize_register( $wp_customize ) {
+    $wp_customize->add_setting('footer_logo', array(
+        'default' => '',
+        'sanitize_callback' => 'absint',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Media_Control($wp_customize, 'footer_logo', array(
+        'section' => 'title_tagline',
+        'label' => 'Логотип'
+    )));
+
+    $wp_customize->selective_refresh->add_partial('footer_logo', array(
+        'selector' => '.footer-logo',
+        'render_callback' => function() {
+            $logo = get_theme_mod('footer_logo');
+            $img = wp_get_attachment_image_src($logo, 'full');
+            if ($img) {
+                return '<img src="' . $img[0] . '" alt="">';
+            } else {
+                return '';
+            }
+        }
+    ));
+}
+add_action( 'customize_register', 'my_customize_register' );

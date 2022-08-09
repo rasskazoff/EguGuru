@@ -165,11 +165,6 @@ if ($category->count > 0) : ?>
 				</div>
 			</div>
 		</div>
-		
-	</div>	
+	</div>	<!-- end card-wrap -->
+	<?php get_footer(); ?>
 </div>
-	
-	</div>
-</div>
-
-<?php get_footer(); ?>

@@ -32,7 +32,7 @@ gulp.task('browser-sync', function() {
 
 // Обьединяем файлы sass, сжимаем и переменовываем
 gulp.task('styles', function() {
-	return gulp.src('src/wp-content/themes/eduguru/assets/sass/**/*.sass')
+	return gulp.src('src/wp-content/themes/eduguru/assets/sass/*.sass')
 	.pipe(sass({
         style: 'compressed',
         errLogToConsole: false,
@@ -42,6 +42,40 @@ gulp.task('styles', function() {
     }))
 	//.pipe(rename({ suffix: '.min', prefix : '' }))
 	.pipe(concat('style.min.css'))
+	.pipe(autoprefixer(['last 15 versions']))
+	.pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
+	.pipe(gulp.dest('src/wp-content/themes/eduguru/assets/css'))
+	.pipe(browsersync.stream())
+});
+
+gulp.task('styles-home', function() {
+	return gulp.src('src/wp-content/themes/eduguru/assets/sass/home-page/*.sass')
+	.pipe(sass({
+        style: 'compressed',
+        errLogToConsole: false,
+        onError: function(err) {
+            return notify().write(err);
+        }
+    }))
+	//.pipe(rename({ suffix: '.min', prefix : '' }))
+	.pipe(concat('style-home.min.css'))
+	.pipe(autoprefixer(['last 15 versions']))
+	.pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
+	.pipe(gulp.dest('src/wp-content/themes/eduguru/assets/css'))
+	.pipe(browsersync.stream())
+});
+
+gulp.task('styles-empty', function() {
+	return gulp.src('src/wp-content/themes/eduguru/assets/sass/empty-page/*.sass')
+	.pipe(sass({
+        style: 'compressed',
+        errLogToConsole: false,
+        onError: function(err) {
+            return notify().write(err);
+        }
+    }))
+	//.pipe(rename({ suffix: '.min', prefix : '' }))
+	.pipe(concat('style-empty.min.css'))
 	.pipe(autoprefixer(['last 15 versions']))
 	.pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
 	.pipe(gulp.dest('src/wp-content/themes/eduguru/assets/css'))
@@ -65,6 +99,17 @@ gulp.task('scripts', function() {
 	.pipe(browsersync.reload({ stream: true }))
 });
 
+gulp.task('scripts-home', function() {
+	return gulp.src([
+		//'src/wp-content/themes/eduguru/assets/libs/jquery/dist/jquery-3.6.0.min.js',
+		'src/wp-content/themes/eduguru/assets/libs/js/home/category.js',
+		'src/wp-content/themes/eduguru/assets/libs/js/home/swiper.js',
+		])
+	.pipe(concat('scripts-home.min.js'))
+	// .pipe(uglify()) // Mifify js (opt.)
+	.pipe(gulp.dest('src/wp-content/themes/eduguru/assets/js'))
+	.pipe(browsersync.reload({ stream: true }))
+});
 
 // сжимаем картинки в папке images в шаблоне, и туда же возвращаем в готовом виде
 gulp.task('imgmin-theme', function() {
@@ -146,9 +191,11 @@ if (gulpversion == 3) {
 
 if (gulpversion == 4) {
 	gulp.task('watch', function() {
-		gulp.watch('src/wp-content/themes/eduguru/assets/sass/**/*.sass', gulp.parallel('styles')); // Наблюдение за sass файлами в папке sass в теме
-		gulp.watch(['src/wp-content/themes/eduguru/assets/libs/**/*.js', 'src/wp-content/themes/eduguru/assets/js/common.js'], gulp.parallel('scripts')); // Наблюдение за JS файлами в папке js
+		gulp.watch('src/wp-content/themes/eduguru/assets/sass/*.sass', gulp.parallel('styles')); // Наблюдение за sass файлами в папке sass в теме
+		gulp.watch('src/wp-content/themes/eduguru/assets/sass/home-page/*.sass', gulp.parallel('styles-home')); 
+		gulp.watch('src/wp-content/themes/eduguru/assets/sass/empty-page/*.sass', gulp.parallel('styles-empty')); 
+		gulp.watch(['src/wp-content/themes/eduguru/assets/libs/**/*.js', 'src/wp-content/themes/eduguru/assets/js/common.js'], gulp.parallel('scripts'), gulp.parallel('scripts-home')); // Наблюдение за JS файлами в папке js
     gulp.watch('src/wp-content/themes/eduguru/**/*.php', browsersync.reload) // Наблюдение за sass файлами php в теме
 	});
-	gulp.task('default', gulp.parallel('styles', 'scripts', 'browser-sync', 'watch'));
+	gulp.task('default', gulp.parallel('styles', 'styles-home', 'styles-empty', 'scripts', 'scripts-home', 'browser-sync', 'watch'));
 }

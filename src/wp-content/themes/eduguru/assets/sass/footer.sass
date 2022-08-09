@@ -3,6 +3,8 @@ footer
     .footer
         padding-top: 80px
         color: #ffffff
+        @media screen and ( max-width: 960px )
+            padding-top: 35px
         >div
             display: flex
             align-items: center
@@ -32,11 +34,15 @@ footer
                 text-decoration: underline
         .copy,.footer_logo
             max-width: 250px
+            display: flex
             a
                 font-size: 22px
                 font-weight: 600
                 text-transform: uppercase
                 text-decoration: none
+                height: 45px
+                img
+                    height: 100%
         @media screen and ( max-width: 960px )
             .footer_logo
                 margin-left: auto

@@ -14,8 +14,16 @@
 		<div class="footer container">
 			<div class="footer_menu">
 				<div class="footer_logo">
+					<a href="/" class="footer-logo">
+						<?php
+						$header_logo = get_theme_mod('footer_logo');
+						$img = wp_get_attachment_image_src($header_logo, 'full');
+						if ($img) :
+							?>
+							<img src="<?php echo $img[0]; ?>" alt="">
+						<?php endif; ?>
+					</a>
 					<?php
-					the_custom_logo();
 					if ( is_front_page() && is_home() ) :
 						?>
 						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
