@@ -52,6 +52,7 @@ function eduguru_setup() {
 			'main-menu' => esc_html__( 'Основное меню', 'eduguru' ),
 			'top-menu' => esc_html__( 'Верхнее меню', 'eduguru' ),
 			'footer-menu' => esc_html__( 'Меню в подвале', 'eduguru' ),
+			'footer-menu-mob' => esc_html__( 'Меню в подвале на мобильном', 'eduguru' ),
 			'bottom-menu' => esc_html__( 'Нижнее меню', 'eduguru' )
 		)
 	);
@@ -279,6 +280,12 @@ function importTags($key, $val){
 [importTags("дата старта",{undefined11})];
 [importTags("с рассрочкой",{undefined12})];
 */
+function importTagSale($val){
+	if (strlen($val)>0){
+		return "со скидкой/промокодом";
+	}
+}
+//[importTagSale({undefined17},{c},{c_2})];
 
 
 //функция для wp all import при импортировании бесплатных курсов
@@ -520,3 +527,29 @@ function extra_mime_types( $mimes ) {
     ));
 }
 add_action( 'customize_register', 'my_customize_register' );
+
+//Удаляем родительские слаги из custom url категорий с использованием Permalink Manager
+function update_url_child($term_id){
+	$taxonomyName = "category";
+	$termchildren = get_term_children( $term_id, $taxonomyName );
+	foreach ($termchildren as $child) {
+		$term = get_term_by( 'id', $child, $taxonomyName );
+		update_url($term->term_id);
+	}
+}
+
+function update_url($term_id){
+	$url = Permalink_Manager_URI_Functions_Tax::get_default_term_uri($term_id);
+	$url = explode('/', $url);
+	$new_url = '';
+	$new_url .=$url[0];
+	for($i=0; $i+1<count($url); $i++){
+		$new_url .= '/'.str_replace('-'.$url[$i], "", $url[$i+1]);
+	}
+	Permalink_Manager_URI_Functions::save_single_uri($term_id, $new_url, true, true);
+}
+
+//add_action( 'saved_term', 'update_url', 10, 2 );
+//add_action( 'saved_term', 'update_url_child', 10, 2 );
+
+

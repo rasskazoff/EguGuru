@@ -1,3 +1,8 @@
+const tabsHeight = (() => {
+	$('.tabs').height($('.tabs-wrap').height() + $('.active .children').height())
+	console.log($('.tabs-wrap').height())
+})
+
 $=jQuery
 $(document).ready(()=>{
 //создаем категории на главной
@@ -12,10 +17,7 @@ $(document).ready(()=>{
 			$(e.target).parent().addClass('active')
 			tabsHeight()
 		})
-		const tabsHeight = (() => {
-			$('.tabs').height($('.tabs-wrap').height() + $('.active .children').height())
-			console.log($('.tabs-wrap').height())
-		})()
+		tabsHeight()
 		//для мобильных
 	}else{
 		$('.tabs-wrap .tab').click((e)=>{
@@ -31,7 +33,7 @@ $(document).ready(()=>{
 //навигация категорий
     const tabs = $('.tabs-wrap')
     const maxScroll = tabs.get(0).scrollWidth - tabs.get(0).clientWidth
-    tabs.width() >= maxScroll ? $('.tabs-nav').hide():''
+    maxScroll > 0 ? $('.tabs-nav').show() : $('.tabs-nav').hide()
         
 	$('.tabs-nav').click((e)=>{
 		let step = 100

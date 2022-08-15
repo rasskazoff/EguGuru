@@ -44,6 +44,14 @@
 					?>
 				</nav>
 			</div>
+			<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'footer-menu-mob',
+							'menu_id'        => 'footer-menu-mob',
+						)
+					);
+					?>
 			<div class="footer_bottom_menu">
 				<div class="copy">
 						Copyright © 2022 Educationguru.ru<br/>

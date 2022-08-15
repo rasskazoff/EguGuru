@@ -92,7 +92,11 @@ if ($category->count > 0) : ?>
 
 <div class="filter container">
 	<h2 class="filter_title">Выберите нужные параметры:</h2>
-	<?php $tags = get_the_tags(); ?>
+	<?php
+	$tags = get_terms( [
+	'taxonomy' => 'post_tag',
+	'hide_empty' => false,
+	]);?>
 	<input type="checkbox" name="filter_more" id="filter_more">
 	<label class="filter_mobile" for="filter_more" onclick="show_btn('.more_btn label','показать больше параметров','скрыть')">Параметры<span class="circle"><?php echo count($tags); ?></span></label>
 

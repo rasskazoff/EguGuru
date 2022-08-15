@@ -28,6 +28,8 @@ footer
                 flex-direction: column-reverse
             nav
                 margin-top: 50px
+                @media screen and ( max-width: 960px )
+                    margin-top: 10px
             *
                 font-size: 14px
             a
@@ -55,11 +57,18 @@ footer
         @media screen and ( max-width: 960px )
             text-align: left
             padding: 0
-            @media screen and ( max-width: 960px )
-                display: flex
-                flex-direction: column
+            display: flex
+            flex-direction: column
             li
                 padding-bottom: 20px
 @media screen and ( max-width: 960px )
-        #footer-menu
-            display: none
+    #footer-menu
+        display: none
+#footer-menu-mob
+    padding-top: 30px
+    @media screen and ( min-width: 961px )
+        display: none
+    a
+        font-size: 16px
+        font-weight: 700
+        text-transform: uppercase

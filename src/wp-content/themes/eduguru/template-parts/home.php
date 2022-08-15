@@ -34,7 +34,7 @@ Template Post Type: post, page, product
 			<div class="tabs-nav">
 				<div class="nav-icon next"></div>
 			</div>
-			<ul class="tabs-wrap">
+			<!--ul class="tabs-wrap">
 			<?php
 			$args = array(
 				'show_option_all'    => '',
@@ -42,7 +42,7 @@ Template Post Type: post, page, product
 				'order'              => 'ASC',
 				'style'              => 'list',
 				'show_count'         => 0,
-				'hide_empty'         => 1,
+				'hide_empty'         => 0,
 				'child_of'           => 16,
 				'taxonomy'           => 'category',
 				'post_type'			 => 'cources',
@@ -57,7 +57,92 @@ Template Post Type: post, page, product
 			
 			wp_list_categories( $args );
 			?>
+			</ul-->
+
+<!-- временные категории -->
+			<ul class="tabs-wrap">
+				<li class="cat-item cat-item-13 active"><div class="tab">программирование</div>
+			<ul class="children">
+				<li class="cat-item cat-item-75"><a href="#">1C-разработка</a>
+			</li>
+				<li class="cat-item cat-item-63"><a href="#">Android-разработка</a>
+			</li>
+				<li class="cat-item cat-item-77"><a href="#">Data Science</a>
+			</li>
+				<li class="cat-item cat-item-62"><a href="#">DevOps</a>
+			</li>
+				<li class="cat-item cat-item-73"><a href="#">Golang-разработка</a>
+			</li>
+				<li class="cat-item cat-item-67"><a href="#">IOS-разработка</a>
+			</li>
+				<li class="cat-item cat-item-59"><a href="#">Java-разработка</a>
+			</li>
+				<li class="cat-item cat-item-54"><a href="#">JavaScript-разработка</a>
+			</li>
+				<li class="cat-item cat-item-64"><a href="#">PHP-разработка</a>
+			</li>
+				<li class="cat-item cat-item-14"><a href="#">Python-разработка</a>
+			</li>
+				<li class="cat-item cat-item-61"><a href="#">QA-тестирование</a>
+			</li>
+				<li class="cat-item cat-item-74"><a href="#">VR/AR разработка</a>
+			</li>
+				<li class="cat-item cat-item-53"><a href="#">Web-разработка</a>
+			</li>
+				<li class="cat-item cat-item-69"><a href="#">Аndroid разработка</a>
+			</li>
+				<li class="cat-item cat-item-66"><a href="#">Верстка на HTML/CSS</a>
+			</li>
+				<li class="cat-item cat-item-70"><a href="#">Информационная безопасность</a>
+			</li>
+				<li class="cat-item cat-item-55"><a href="#">Мобильная разработка</a>
+			</li>
+				<li class="cat-item cat-item-89"><a href="#">Программирование ios</a>
+			</li>
+				<li class="cat-item cat-item-58"><a href="#">Разработка игр</a>
+			</li>
+				<li class="cat-item cat-item-65"><a href="#">Разработка игр на Unity</a>
+			</li>
+				<li class="cat-item cat-item-68"><a href="#">Разработка на C++</a>
+			</li>
+				<li class="cat-item cat-item-71"><a href="#">Разработка на Kotlin</a>
+			</li>
+				<li class="cat-item cat-item-72"><a href="#">Разработка на Swift</a>
+			</li>
+				<li class="cat-item cat-item-57"><a href="#">Системное администрирование</a>
+			</li>
+				<li class="cat-item cat-item-60"><a href="#">Создание сайтов</a>
+			</li>
+				<li class="cat-item cat-item-56"><a href="#">Управление разработкой и IT</a>
+			</li>
+				<li class="cat-item cat-item-76"><a href="#">Фреймворк Laravel</a>
+			</li>
 			</ul>
+			</li>
+			<li class="cat-item cat-item-80"><div class="tab">Аналитика</div>
+			</li>
+				<li class="cat-item cat-item-78"><div class="tab">Дизайн</div>
+			</li>
+				<li class="cat-item cat-item-84"><div class="tab">Иностранные языки</div>
+			</li>
+				<li class="cat-item cat-item-79"><div class="tab">Маркетинг</div>
+			</li>
+				
+				<li class="cat-item cat-item-81"><div class="tab">Создание контента</div>
+			</li>
+				<li class="cat-item cat-item-82"><div class="tab">Управление</div>
+			</li>
+			<li class="cat-item cat-item-82"><div class="tab">Тестовая категория</div>
+			</li>
+			<li class="cat-item cat-item-82"><div class="tab">Тестовая категория2</div>
+			</li>
+			<li class="cat-item cat-item-82"><div class="tab">Тестовая категория3</div>
+			</li>
+			
+						</ul>
+
+
+<!-- временные категории -->
 		</div>
 	</div>
 	
