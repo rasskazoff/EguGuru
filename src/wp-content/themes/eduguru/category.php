@@ -38,6 +38,9 @@ if ($category->count > 0) : ?>
 			$id = $post->ID;
 			//получаем id постов в категории
 			$price[] = isset(get_fields($id)['knopka']['czena'])?get_fields($id)['knopka']['czena']:'';						//получаем значение поля цена по id поста
+			$minprice = preg_replace("/[^0-9]/", '', $price); //удаляем все кроме цифр
+			$minprice = min(array_filter($minprice)); //удаляем пустые и ищем минимальное значение
+			
 			$school[] = isset(get_fields($id)['school'])?get_fields($id)['school']:'';    									//получаем названия школ из title url logo
 
 			$promo_discount = isset(get_fields($id)['promo']['promo_discount'])?get_fields($id)['promo']['promo_discount']:'';
@@ -76,7 +79,7 @@ if ($category->count > 0) : ?>
 			<div class="counter_item_text"><span><?php echo true_wordform($count, 'курс', 'курса', 'курсов') ?><?php echo $child_cat; ?></span> для <?php echo $parent_cat ?> найдено</div>
 		</div>
 		<div class="counter_item">
-			<div class="counter_item_num"><?php if (mb_strtolower(min($price)) == 'бесплатно'){ echo "0"; }else{echo min($price);}?></div>
+			<div class="counter_item_num"><?php if (mb_strtolower(min($price)) == 'бесплатно'){ echo "0"; }else{echo $minprice;}?></div>
 			<div class="counter_item_text"><span>₽ минимальная цена</span> за курс</div>
 		</div>
 		
