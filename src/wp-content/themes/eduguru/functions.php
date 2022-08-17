@@ -549,7 +549,7 @@ function update_url($term_id){
 	Permalink_Manager_URI_Functions::save_single_uri($term_id, $new_url, true, true);
 }
 
-//add_action( 'saved_term', 'update_url', 10, 2 );
-//add_action( 'saved_term', 'update_url_child', 10, 2 );
+add_action( 'saved_term', 'update_url', 10, 2 );
+add_action( 'saved_term', 'update_url_child', 10, 2 );
 
 

@@ -127,7 +127,7 @@
 								<?php if (mb_strtolower(get_sub_field('czena')) == 'бесплатно') : ?>
 									<span><?= get_sub_field('czena') ?></span>
 								<?php elseif (get_sub_field('czena')) : ?>
-									от <span><?= get_sub_field('czena') ?>₽</span>/урок
+									от <span><?= get_sub_field('czena') ?>₽</span>/курс
 								<?php endif; ?>
 							</div>
 							<?php endwhile; ?>
