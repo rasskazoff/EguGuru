@@ -148,9 +148,9 @@ gulp.task('deploy-site', function() {
 // Отгрузка только шаблона на хостинг
 gulp.task('deploy-theme', function() {
 	var conn = ftp.create({
-		host:      'a304639.ftp.mchost.ru', // or domain
-		user:      'a304639_a239912',
-		password:  'Od13Uy0mN1',
+		host:      'domain.ru', // or domain
+		user:      'user',
+		password:  'password',
 		parallel:  10,
 		log: gutil.log
 	});
