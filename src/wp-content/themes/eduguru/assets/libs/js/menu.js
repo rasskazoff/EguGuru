@@ -15,4 +15,17 @@ jQuery(function ($) {
 
         $(this).toggleClass('active')
     })
+
+    if (innerWidth > 960){
+        $('.menu>.menu-item-has-children .sub-menu .menu-item-has-children').mouseenter(function(){
+            let subMenu = $(this).find('>.sub-menu')
+            let subMenuPos = subMenu.offset().left + subMenu.outerWidth() 
+        
+            if (innerWidth < subMenuPos){
+                $(subMenu).attr('style', 'left:'+(subMenu.position().left+(innerWidth-subMenuPos))+'px; top: 90%;')
+            }else{
+                $(subMenu).attr('style')
+            }
+        })
+    }
 })

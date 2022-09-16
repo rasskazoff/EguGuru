@@ -20,7 +20,6 @@
 	<?php  if (is_page_template('template-parts/home.php')): ?>
 	<link rel="stylesheet" href="<?php echo get_bloginfo('template_url');?>/assets/css/style-home.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
-	<script async="" src="<?php echo get_bloginfo('template_url');?>/assets/js/scripts-home.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 	<?php endif; ?>
 	<?php  if (is_page_template('template-parts/empty.php')): ?>
@@ -29,7 +28,35 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link as="style" rel="stylesheet preload prefetch" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" type="text/css" crossorigin="anonymous">
-	<title><?php echo get_field('title'); ?></title>
+	<title><?php
+	if (is_category()) {
+		get_field('title') ? the_field('title') : bloginfo('name');
+	} elseif (is_search()){
+		$search_page = get_page_by_path('search');
+		$search_page = $search_page->ID;
+		if ( get_field('title',$search_page) ){the_field('title',$search_page); }else{ echo get_the_title($search_page); }
+	} elseif (is_404()){
+		echo "Страница не найдена";
+	} else {
+		get_field('title') ? the_field('title') : the_title();
+	}
+	?></title>
+	<meta name="description" content="<?php
+		if (is_category()) {
+			if(category_description()){
+				echo strip_tags(category_description(), '');
+			}else{
+				echo get_bloginfo('description');
+			}
+		} elseif (is_search()){
+			if ( get_field('description',$search_page) ){the_field('description',$search_page); }else{ echo get_the_title($search_page); }
+		} elseif (is_404()){
+			echo "Страница не найдена";
+		} else {
+			get_field('description') ? the_field('description') : the_title();
+		}
+	?>"> 
+	
 	<?php wp_head(); ?>
 </head>
 

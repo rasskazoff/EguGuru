@@ -10,24 +10,23 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main container">
 
 		<section class="error-404 not-found">
 			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'eduguru' ); ?></h1>
+				<h1 class="page-title"><?php esc_html_e( 'Страница 404', 'eduguru' ); ?></h1>
 			</header><!-- .page-header -->
 
 			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'eduguru' ); ?></p>
+				<p>Такой страницы не существует. Возможно, Вы некорректно набрали адрес страницы или перешли по неправильной ссылке на наш сайт.</p>
+				<p>В любом случае не расстраивайтесь, у нас много полезной и актуальной информации. Посетите интересующий Вас раздел сайта:</p>
 
 					<?php
-					get_search_form();
-
-					the_widget( 'WP_Widget_Recent_Posts' );
+					the_widget('WP_Widget_Pages', 'title=Страницы&exclude=179');
 					?>
 
 					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'eduguru' ); ?></h2>
+						<h2 class="widget-title"><?php esc_html_e( 'Каталог курсов', 'eduguru' ); ?></h2>
 						<ul>
 							<?php
 							wp_list_categories(
@@ -42,14 +41,10 @@ get_header();
 							?>
 						</ul>
 					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$eduguru_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'eduguru' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$eduguru_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
+					<style>
+						.widget ul{ margin: 5px 20px; padding: 0; }
+						h1, h2, h3, h4, h5, h6{ padding-top: 40px;}
+					</style>
 
 			</div><!-- .page-content -->
 		</section><!-- .error-404 -->

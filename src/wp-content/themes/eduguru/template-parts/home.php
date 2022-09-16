@@ -8,9 +8,15 @@ Template Post Type: post, page, product
 <div class="home-page">
 <div class="main">
 	<div class="container">
-		<h1>Все курсы от всех школ в одном месте —более 1499+ курсов от 89+ школ 
-		с эксклюзивными скидками и промокодами</h1>
-		<div class="descript">Выбирайте подходящее обучение по своим параметрам и начинайте путь к своей мечте</div>
+		<h1><?php if (get_field('h1')) : ?>
+			<?= get_field('h1') ?>
+		<?php endif; ?>
+		</h1>
+		<div class="descript">
+		<?php if (get_field('descript')) : ?>
+			<?= get_field('descript') ?>
+		<?php endif; ?>
+		</div>
 			<div id="search-main" class="search">
 				<!-- search form -->
 				<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
@@ -34,115 +40,35 @@ Template Post Type: post, page, product
 			<div class="tabs-nav">
 				<div class="nav-icon next"></div>
 			</div>
-			<!--ul class="tabs-wrap">
-			<?php
-			$args = array(
-				'show_option_all'    => '',
-				'orderby'            => 'name',
-				'order'              => 'ASC',
-				'style'              => 'list',
-				'show_count'         => 0,
-				'hide_empty'         => 0,
-				'child_of'           => 16,
-				'taxonomy'           => 'category',
-				'post_type'			 => 'cources',
-				'hide_title_if_empty'=> true,
-				'separator'          => '<br />',
-				'exclude' 			 => 10,
-				'depth'				 => '2',
-				'title_li'			 => '',
-				'show_option_none'   => '',
-				'echo'				 => '1'
-			);
-			
-			wp_list_categories( $args );
-			?>
-			</ul-->
-
-<!-- временные категории -->
 			<ul class="tabs-wrap">
-				<li class="cat-item cat-item-13 active"><div class="tab">программирование</div>
-			<ul class="children">
-				<li class="cat-item cat-item-75"><a href="#">1C-разработка</a>
-			</li>
-				<li class="cat-item cat-item-63"><a href="#">Android-разработка</a>
-			</li>
-				<li class="cat-item cat-item-77"><a href="#">Data Science</a>
-			</li>
-				<li class="cat-item cat-item-62"><a href="#">DevOps</a>
-			</li>
-				<li class="cat-item cat-item-73"><a href="#">Golang-разработка</a>
-			</li>
-				<li class="cat-item cat-item-67"><a href="#">IOS-разработка</a>
-			</li>
-				<li class="cat-item cat-item-59"><a href="#">Java-разработка</a>
-			</li>
-				<li class="cat-item cat-item-54"><a href="#">JavaScript-разработка</a>
-			</li>
-				<li class="cat-item cat-item-64"><a href="#">PHP-разработка</a>
-			</li>
-				<li class="cat-item cat-item-14"><a href="#">Python-разработка</a>
-			</li>
-				<li class="cat-item cat-item-61"><a href="#">QA-тестирование</a>
-			</li>
-				<li class="cat-item cat-item-74"><a href="#">VR/AR разработка</a>
-			</li>
-				<li class="cat-item cat-item-53"><a href="#">Web-разработка</a>
-			</li>
-				<li class="cat-item cat-item-69"><a href="#">Аndroid разработка</a>
-			</li>
-				<li class="cat-item cat-item-66"><a href="#">Верстка на HTML/CSS</a>
-			</li>
-				<li class="cat-item cat-item-70"><a href="#">Информационная безопасность</a>
-			</li>
-				<li class="cat-item cat-item-55"><a href="#">Мобильная разработка</a>
-			</li>
-				<li class="cat-item cat-item-89"><a href="#">Программирование ios</a>
-			</li>
-				<li class="cat-item cat-item-58"><a href="#">Разработка игр</a>
-			</li>
-				<li class="cat-item cat-item-65"><a href="#">Разработка игр на Unity</a>
-			</li>
-				<li class="cat-item cat-item-68"><a href="#">Разработка на C++</a>
-			</li>
-				<li class="cat-item cat-item-71"><a href="#">Разработка на Kotlin</a>
-			</li>
-				<li class="cat-item cat-item-72"><a href="#">Разработка на Swift</a>
-			</li>
-				<li class="cat-item cat-item-57"><a href="#">Системное администрирование</a>
-			</li>
-				<li class="cat-item cat-item-60"><a href="#">Создание сайтов</a>
-			</li>
-				<li class="cat-item cat-item-56"><a href="#">Управление разработкой и IT</a>
-			</li>
-				<li class="cat-item cat-item-76"><a href="#">Фреймворк Laravel</a>
-			</li>
-			</ul>
-			</li>
-			<li class="cat-item cat-item-80"><div class="tab">Аналитика</div>
-			</li>
-				<li class="cat-item cat-item-78"><div class="tab">Дизайн</div>
-			</li>
-				<li class="cat-item cat-item-84"><div class="tab">Иностранные языки</div>
-			</li>
-				<li class="cat-item cat-item-79"><div class="tab">Маркетинг</div>
-			</li>
-				
-				<li class="cat-item cat-item-81"><div class="tab">Создание контента</div>
-			</li>
-				<li class="cat-item cat-item-82"><div class="tab">Управление</div>
-			</li>
-			<li class="cat-item cat-item-82"><div class="tab">Тестовая категория</div>
-			</li>
-			<li class="cat-item cat-item-82"><div class="tab">Тестовая категория2</div>
-			</li>
-			<li class="cat-item cat-item-82"><div class="tab">Тестовая категория3</div>
-			</li>
+			<?php
+
+			$categories = get_categories( [
+				'taxonomy'     => 'category',
+				'include'      => get_field("category"),
+			] );
 			
-						</ul>
+			if( $categories ){
+				foreach( $categories as $cat ){
 
+					$child_cat = get_categories( [
+						'taxonomy'     => 'category',
+						'child_of'     => $cat->cat_ID,
+					] );
+					$child_li = '';
+					if( $child_cat ){
+						foreach( $child_cat as $child ){
+							$child_li .= '<li class="cat-item"><a href="'.get_category_link( $child->term_id ).'">'.$child->cat_name.'</a></li>';
+						}
+					}
+					echo '<li class="cat-item"><div class="tab">'.$cat->cat_name.'</div><ul class="children">'.$child_li.'</ul></li>';
+			
+				}
+			}
 
-<!-- временные категории -->
+			?>
+			</ul>
+
 		</div>
 	</div>
 	
@@ -171,7 +97,8 @@ Template Post Type: post, page, product
 									<div class="progress" style="width:calc(100% / 5 * <?php echo str_replace(',','.', the_field('rate')); ?>)"></div>
 								</div>
 								<div class="rate__count">рейтинг<div class="count"><?php the_field('rate'); ?></div></div>
-								<a href="<?php echo get_permalink(); ?>"><button class="rate__button">ПОДРОБНЕЕ</button></a>
+								<?php /*<a href="<?php echo get_permalink(); ?>"><button class="rate__button">ПОДРОБНЕЕ</button></a> Временно отключаем ссылки */?>
+								<a href="#"><button class="rate__button">ПОДРОБНЕЕ</button></a>
 							</div>
 						</div>
 					</div>

@@ -183,7 +183,12 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 function add_scripts(){
 
 	wp_enqueue_script('jquery');
-	wp_enqueue_script("eduguru-js", get_template_directory_uri() . "/assets/js/scripts.min.js");
+	if (is_category()){
+		wp_enqueue_script("eduguru-js", get_template_directory_uri() . "/assets/js/scripts.min.js");
+	}elseif(is_page_template('template-parts/home.php')){
+		wp_enqueue_script("eduguru-home-js", get_template_directory_uri() . "/assets/js/scripts-home.min.js");
+	}
+	wp_enqueue_script("eduguru-menu-js", get_template_directory_uri() . "/assets/libs/js/menu.js");
 	
  }
  
@@ -243,7 +248,9 @@ function partner(){
 	if (isset($_GET['action'])){
 		if ($_GET['action'] == 'partner'){
 			if (isset($_GET['id'])){
-				echo '<style>body{display:none}</style><script>window.location.href="'.get_fields($_GET['id'])['knopka']['partner_url'].'"</script>';				
+				$url = get_fields($_GET['id'])['knopka']['partner_url'] ? get_fields($_GET['id'])['knopka']['partner_url'] : get_fields($_GET['id'])['knopka']['url'];
+				$url = $url ? $url : "/";
+				echo '<style>body{display:none}</style><script>window.location.href="'.$url.'"</script>';				
 			}
 		}
 	}
@@ -553,3 +560,20 @@ add_action( 'saved_term', 'update_url', 10, 2 );
 add_action( 'saved_term', 'update_url_child', 10, 2 );
 
 
+function root_acf_format_value( $value, $post_id, $field ) {
+	$value = do_shortcode($value);	
+	return $value;
+}
+add_filter('acf/format_value', 'root_acf_format_value', 10, 3);
+/* шорткод актуальный год */
+function year_shortcode() {
+	$year = date('Y');
+	return $year;
+   }
+add_shortcode('year', 'year_shortcode');
+
+function month_shortcode() {
+	$month = date('m');
+	return $month;
+   }
+add_shortcode('month', 'month_shortcode');
